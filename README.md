@@ -44,8 +44,8 @@ src
 
 │   └── generic
 
-│       ├── components
+│    |   ├── components
 
-│       └── pages
+│    |   └── pages
 
 └── index.js
