@@ -1,11 +1,11 @@
 import { ApolloClient } from '@apollo/client';
-import { LOGIN_MUTATION, REGISTER_MUTATION } from '../graphql/authOperations';
-import { setToken, removeToken, decodeToken } from '../utils/token';
-import type { AuthCredentials, DecodedUser } from '../types/authTypes';
+import { LOGIN_MUTATION, REGISTER_MUTATION } from '../graphql/authOperations.ts';
+import { setToken, removeToken, decodeToken } from '../utils/token.ts';
+import type { AuthCredentials, DecodedUser } from '../types/authTypes.ts';
 import type {
   LoginMutationData,
   RegisterMutationData,
-} from '../types/dataTypes';
+} from '../types/dataTypes.ts';
 import type React from 'react';
 
 type SetUser = React.Dispatch<React.SetStateAction<DecodedUser | null>>;
