@@ -21,6 +21,7 @@ export type AuthCredentials = {
 export type AuthContextType = {
   isAuthenticated: boolean;
   user: DecodedUser | null;
+  loading: boolean;
   login: (credentials: AuthCredentials) => Promise<void>;
   register: (credentials: AuthCredentials) => Promise<void>;
   logout: () => void;
