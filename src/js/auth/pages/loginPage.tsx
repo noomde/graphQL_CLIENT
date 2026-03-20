@@ -1,5 +1,11 @@
 import LoginComponent from '../components/loginComponent.tsx';
+import { type JSX } from 'react';
 
-export default function LoginPage() {
+/**
+ * LoginPage component serves as the main page for user login, rendering the LoginComponent.
+ *
+ * @returns {JSX.Element} The login page component.
+ */
+export default function LoginPage(): JSX.Element {
   return <LoginComponent />;
 }
