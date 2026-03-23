@@ -14,7 +14,7 @@ export const GET_SCORES_QUERY = gql`
 `;
 
 export const GET_SCORE_QUERY = gql`
-  query score(gameId: ID!) {
+  query score(gameId: Int!) {
     score(gameId: $gameId) {
       metascore
       metascoreCount
