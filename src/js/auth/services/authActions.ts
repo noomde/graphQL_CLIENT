@@ -5,7 +5,7 @@ import type { AuthCredentials, DecodedUser } from '../types/authTypes.ts';
 import type {
   LoginMutationData,
   RegisterMutationData,
-} from '../types/dataTypes.ts';
+} from '../types/responseTypes.ts';
 import type React from 'react';
 
 type SetUser = React.Dispatch<React.SetStateAction<DecodedUser | null>>;
