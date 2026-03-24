@@ -1,3 +1,6 @@
+/**
+ * Data types for the score query response, containing the score data.
+ */
 export type scoreQueryData = {
   score: {
     metascore: number;
