@@ -11,6 +11,7 @@ export default function RegisterComponent(): JSX.Element {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
   const { register } = useAuth();
   const navigate = useNavigate();
 
@@ -19,14 +20,18 @@ export default function RegisterComponent(): JSX.Element {
    *
    * @param event - The submit event.
    */
-  function handleRegister(event: React.SubmitEvent) {
+  async function handleRegister(event: React.SubmitEvent) {
     event.preventDefault();
+    setLoading(true);
+
     try {
-      register({ username, password });
+      await register({ username, password });
       navigate('home'); // TODO add the actual path
     } catch (error) {
       setError('Registration failed. Please check your credentials.');
       console.error('Registration error:', error);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -52,9 +57,9 @@ export default function RegisterComponent(): JSX.Element {
       <button
         className="register-button"
         type="submit"
-        disabled={!username || !password}
+        disabled={!username || !password || loading}
       >
-        Register
+        {loading ? 'Registering...' : 'Register'}
       </button>
     </form>
   );

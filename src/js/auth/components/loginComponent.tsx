@@ -11,6 +11,7 @@ export default function LoginComponent(): JSX.Element {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -19,14 +20,18 @@ export default function LoginComponent(): JSX.Element {
    *
    * @param event - The submit event.
    */
-  function handleLogin(event: React.SubmitEvent<HTMLFormElement>) {
+  async function handleLogin(event: React.SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
+    setLoading(true);
+
     try {
-      login({ username, password });
+      await login({ username, password });
       navigate('home'); // TODO add the actual path
     } catch (error) {
       setError('Login failed. Please check your credentials.');
       console.error('Login error:', error);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -34,6 +39,7 @@ export default function LoginComponent(): JSX.Element {
     <form className="login-form" onSubmit={handleLogin}>
       <h1 className="login-title">Login</h1>
       {error && <p className="login-error">{error}</p>}
+
       <input
         className="login-input"
         type="text"
@@ -41,6 +47,7 @@ export default function LoginComponent(): JSX.Element {
         value={username}
         onChange={(e) => setUsername(e.target.value)}
       />
+
       <input
         className="login-input"
         type="password"
@@ -48,8 +55,9 @@ export default function LoginComponent(): JSX.Element {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button className="login-button" type="submit">
-        Login
+
+      <button className="login-button" type="submit" disabled={loading}>
+        { loading ? 'Logging in...' : 'Login' }
       </button>
     </form>
   );
