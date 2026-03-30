@@ -1,5 +1,5 @@
 import { type JSX } from 'react';
-import { useScore } from '../hooks/scoreHook';
+import { useScore } from '../hooks/scoreHook.ts';
 
 /**
  * A component for rendering a score.
@@ -18,6 +18,7 @@ export default function ScoreComponent(): JSX.Element {
     return <p>Failed to load score, please try again</p>;
   }
 
+  // TODO add the real rendering of data
   return (
     <div>
       <h1>Score</h1>

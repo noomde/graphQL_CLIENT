@@ -10,8 +10,6 @@ export type Score = {
   userScoreSentiment: string;
 };
 
-
-
 /**
  * Data types for the score query response, containing the score data.
  */
@@ -23,5 +21,11 @@ export type scoreQueryData = {
  * Data types for the scores query response, containing the score data with metadata.
  */
 export type scoresQueryData = {
-  scores: Score[]
+  scores: {
+  items: Score[];
+  totalCount: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+  }
 }
