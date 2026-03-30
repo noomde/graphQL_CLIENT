@@ -71,6 +71,37 @@ export const GET_NESTED_GAMES_QUERY = gql`
   }
 `;
 
+export const GET_NESTED_GAME_QUERY = gql`
+  query getNestedGame{
+    game {
+      id
+      metacriticId
+      title
+      releaseDate
+      rating
+      genres
+      description
+      developer
+      publisher
+      scores {
+        metascore
+        metascoreCount
+        metascoreSentiment
+        userScore
+        userScoreCount
+        userScoreSentiment
+      }
+      platforms {
+        name
+      }
+    }
+    totalCount
+    page
+    limit
+    totalPages
+  }
+`;
+
 export const CREATE_GAME_MUTATION = gql`
   mutation createGame(
     $title: String!

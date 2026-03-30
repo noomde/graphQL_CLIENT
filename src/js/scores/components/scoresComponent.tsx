@@ -1,6 +1,11 @@
 import { type JSX } from 'react';
 import { useScores } from '../hooks/scoreHook.ts';
 
+/**
+ * A component for rendering all the scores.
+ *
+ * @returns A element with all score data.
+ */
 export default function ScoresComponent(): JSX.Element {
   const { scores, loading, error } = useScores();
 
