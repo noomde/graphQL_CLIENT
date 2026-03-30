@@ -11,7 +11,7 @@ import { useQuery } from '@apollo/client/react';
 /**
  * A custom hook for querying a specific score.
  *
- * @returns 
+ * @returns the score data.
  */
 export function useScore() {
   const { data, loading, error } = useQuery<scoreQueryData>(GET_SCORE_QUERY);
@@ -26,7 +26,7 @@ export function useScore() {
 /**
  * A custom hook for querying all scores with metadata.
  *
- * @returns 
+ * @returns the scores data.
  */
 export function useScores() {
   const { data, loading, error } = useQuery<scoresQueryData>(GET_SCORES_QUERY);

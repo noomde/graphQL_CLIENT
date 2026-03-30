@@ -2,13 +2,14 @@ import { type JSX } from 'react';
 import { usePlatforms } from '../hooks/usePlatforms.ts';
 
 /**
- * 
+ * A component for rendering platforms.
  *
- * @returns 
+ * @returns A element with the platform data.
  */
 export default function PlatformsComponent(): JSX.Element {
   const { platforms, loading, error } = usePlatforms();
 
+  // TODO update to make more less repetetive
   if (loading) {
     return <p>Loading platforms...</p>;
   }
