@@ -63,3 +63,17 @@ export type GamesQueryData = {
     totalPages: number;
   };
 };
+
+/**
+ * Data type for the create game mutation response, containing the created game data.
+ */
+export type CreateGameMutationData = {
+  createGame: Game;
+};
+
+/**
+ * Data type for the update game mutation response, containing the updated game data.
+ */
+export type UpdateGameMutationData = {
+  updateGame: Game;
+};
