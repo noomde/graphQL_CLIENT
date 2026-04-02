@@ -28,4 +28,7 @@ export const GENRES = [
   'VR',
 ] as const;
 
+/**
+ * Defines the Genre type as a union of the string literals in the GENRES array.
+ */
 export type Genre = (typeof GENRES)[number];
