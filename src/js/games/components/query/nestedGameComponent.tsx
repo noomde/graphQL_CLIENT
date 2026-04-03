@@ -1,6 +1,12 @@
 import { type JSX } from 'react';
 import { useNestedGame } from '../../hooks/useGame.ts';
 
+/**
+ * A component for rendering a game with nested data (score and platforms).
+ *
+ * @param id - the id of the game.
+ * @returns An element with the game, score and platform data for a specific game.
+ */
 export default function NestedGameComponent({
   id,
 }: {

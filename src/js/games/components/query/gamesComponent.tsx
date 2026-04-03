@@ -21,7 +21,7 @@ export default function GamesComponent(): JSX.Element {
   // TODO add the real rendering of data and the actual url for metacritic.
   return (
     <div>
-      <h1>Games</h1>
+      <h2>Games</h2>
 
       <ul>
         {games.items.map((game, index) => (
