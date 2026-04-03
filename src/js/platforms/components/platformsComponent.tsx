@@ -4,7 +4,7 @@ import { usePlatforms } from '../hooks/usePlatforms.ts';
 /**
  * A component for rendering platforms.
  *
- * @returns A element with the platform data.
+ * @returns An element with the platform data.
  */
 export default function PlatformsComponent(): JSX.Element {
   const { platforms, loading, error } = usePlatforms();

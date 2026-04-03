@@ -1,3 +1,5 @@
+import { useQuery } from '@apollo/client/react';
+
 import {
   GET_GAMES_QUERY,
   GET_GAME_QUERY,
@@ -10,15 +12,17 @@ import {
   type NestedGameQueryData,
   type NestedGamesQueryData,
 } from '../types/responseType';
-import { useQuery } from '@apollo/client/react';
 
 /**
  * A custom hook for querying a specific game.
  *
+ * @param id - The id of the game to query.
  * @returns The game data.
  */
-export function useGame() {
-  const { data, loading, error } = useQuery<GameQueryData>(GET_GAME_QUERY);
+export function useGame(id: number) {
+  const { data, loading, error } = useQuery<GameQueryData>(GET_GAME_QUERY, {
+    variables: { id },
+  });
 
   return {
     game: data?.game,
@@ -47,9 +51,12 @@ export function useGames() {
  *
  * @returns The game, score and platform data for a specific game.
  */
-export function useNestedGame() {
+export function useNestedGame(id: number) {
   const { data, loading, error } = useQuery<NestedGameQueryData>(
     GET_NESTED_GAME_QUERY,
+    {
+      variables: { id },
+    },
   );
 
   return {
