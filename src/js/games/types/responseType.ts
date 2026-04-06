@@ -77,3 +77,12 @@ export type CreateGameMutationData = {
 export type UpdateGameMutationData = {
   updateGame: Game;
 };
+
+/**
+ * Data type for the delete game mutation response, containing a message confirming deletion.
+ */
+export type DeleteGameMutationData = {
+  deleteGame: {
+    message: string;
+  }
+}

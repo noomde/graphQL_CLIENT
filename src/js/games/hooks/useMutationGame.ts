@@ -2,10 +2,12 @@ import { useMutation } from '@apollo/client/react';
 import {
   CREATE_GAME_MUTATION,
   UPDATE_GAME_MUTATION,
+  DELETE_GAME_MUTATION
 } from '../graphql/gameOperations.ts';
 import type { CreateGameInput, UpdateGameInput } from '../types/inputType.ts';
 import type {
   CreateGameMutationData,
+  DeleteGameMutationData,
   UpdateGameMutationData,
 } from '../types/responseType.ts';
 import {
@@ -40,6 +42,11 @@ export function useCreateGame() {
   };
 }
 
+/**
+ * A custom hook for updating a game.
+ *
+ * @returns The updated game data and mutation state.
+ */
 export function useUpdateGame() {
   const [mutate, { data, loading, error }] =
     useMutation<UpdateGameMutationData>(UPDATE_GAME_MUTATION);
@@ -58,6 +65,32 @@ export function useUpdateGame() {
   return {
     updateGame,
     game: data?.updateGame ?? null,
+    loading,
+    error,
+  };
+}
+
+/**
+ * A custom hook for deleting a game.
+ *
+ * @returns A function to delete a game and the mutation state.
+ */
+export function useDeleteGame() {
+  const [mutate, { data, loading, error}] = useMutation<DeleteGameMutationData>(DELETE_GAME_MUTATION);
+
+  async function deleteGame(id: number) {
+    const result = await mutate({
+      variables: {
+        id,
+      },
+    });
+
+    return result.data?.deleteGame ?? null;
+  }
+
+  return {
+    deleteGame,
+    game: data?.deleteGame ?? null,
     loading,
     error,
   };

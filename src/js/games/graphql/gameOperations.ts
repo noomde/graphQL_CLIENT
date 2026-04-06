@@ -171,15 +171,7 @@ export const UPDATE_GAME_MUTATION = gql`
 export const DELETE_GAME_MUTATION = gql`
   mutation deleteGame($id: Int!) {
     deleteGame(id: $id) {
-      id
-      metacriticId
-      title
-      releaseDate
-      rating
-      genres
-      description
-      developer
-      publisher
+      message
     }
   }
 `;
