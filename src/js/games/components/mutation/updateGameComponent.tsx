@@ -4,6 +4,12 @@ import { useUpdateGame } from '../../hooks/useMutationGame.tsx';
 import { type Genre, GENRES } from '../../types/genresType.ts';
 import { type Rating, RATINGS } from '../../types/ratingType.ts';
 
+/**
+ * A component for updating a game.
+ *
+ * @param id - The id of the game to update.
+ * @returns An element with a form to update the game and the mutation state.
+ */
 export default function UpdateGameComponent({
   id,
 }: {
@@ -23,6 +29,11 @@ export default function UpdateGameComponent({
 
   const navigate = useNavigate();
 
+  /**
+   * Handles the form submission for updating a game. It calls the updateGame mutation and navigates to the home page on success, or sets an error message on failure.
+   *
+   * @param event - The form submission event.
+   */
   async function handleUpdateGame(event: React.SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
     setLoading(true);

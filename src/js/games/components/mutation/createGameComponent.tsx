@@ -4,6 +4,11 @@ import { useCreateGame } from '../../hooks/useMutationGame.tsx';
 import { type Genre, GENRES } from '../../types/genresType.ts';
 import { type Rating, RATINGS } from '../../types/ratingType.ts';
 
+/**
+ * A component for creating a game.
+ *
+ * @returns An element with a form to create a game and the mutation state.
+ */
 export default function CreateGameComponent(): JSX.Element {
   const [title, setTitle] = useState('');
   const [releaseDate, setReleaseDate] = useState('');
@@ -19,6 +24,11 @@ export default function CreateGameComponent(): JSX.Element {
 
   const navigate = useNavigate();
 
+  /**
+   * Handles the form submission for creating a game. It calls the createGame mutation and navigates to the home page on success, or sets an error message on failure.
+   *
+   * @param event - The form submission event.
+   */
   async function handleCreateGame(event: React.SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
     setLoading(true);
