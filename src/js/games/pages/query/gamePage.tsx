@@ -1,4 +1,4 @@
-import GameComponent from '../../components/query/gameComponent';
+import GameComponent from '../../components/query/gameComponent.tsx';
 import { type JSX } from 'react';
 import { useParams } from 'react-router-dom';
 

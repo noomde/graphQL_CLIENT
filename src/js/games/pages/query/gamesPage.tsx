@@ -1,4 +1,4 @@
-import GamesComponent from '../../components/query/gamesComponent';
+import GamesComponent from '../../components/query/gamesComponent.tsx';
 import { type JSX } from 'react';
 
 export default function GamesPage(): JSX.Element {
