@@ -13,8 +13,10 @@ import { useQuery } from '@apollo/client/react';
  *
  * @returns the score data.
  */
-export function useScore() {
-  const { data, loading, error } = useQuery<scoreQueryData>(GET_SCORE_QUERY);
+export function useScore(id: number) {
+  const { data, loading, error } = useQuery<scoreQueryData>(GET_SCORE_QUERY, {
+    variables: { gameId: id },
+  });
 
   return {
     score: data?.score,

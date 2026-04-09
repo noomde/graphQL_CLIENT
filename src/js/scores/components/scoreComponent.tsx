@@ -6,8 +6,8 @@ import { useScore } from '../hooks/scoreHook.ts';
  *
  * @returns A element with the score data.
  */
-export default function ScoreComponent(): JSX.Element {
-  const { score, loading, error } = useScore();
+export default function ScoreComponent({ id }: { id: number}): JSX.Element {
+  const { score, loading, error } = useScore(id);
 
   // TODO update to make more less repetetive
   if (loading) {

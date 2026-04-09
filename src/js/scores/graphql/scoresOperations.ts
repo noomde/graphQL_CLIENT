@@ -2,13 +2,19 @@ import { gql } from '@apollo/client';
 
 export const GET_SCORES_QUERY = gql`
   query {
-    scores {
-      metascore
-      metascoreCount
-      metascoreSentiment
-      userScore
-      userScoreCount
-      userScoreSentiment
+    scores(page: 1, limit: 10) {
+      items {
+        metascore
+        metascoreCount
+        metascoreSentiment
+        userScore
+        userScoreCount
+        userScoreSentiment
+      }
+      totalCount
+      page
+      limit
+      totalPages
     }
   }
 `;
