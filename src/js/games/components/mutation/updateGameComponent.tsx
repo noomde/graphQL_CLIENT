@@ -1,6 +1,7 @@
 import { useState, type JSX } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useUpdateGame } from '../../hooks/useMutationGame.tsx';
+import { useUpdateGame } from '../../hooks/useMutationGame.ts';
+
 import { type Genre, GENRES } from '../../types/genresType.ts';
 import { type Rating, RATINGS } from '../../types/ratingType.ts';
 

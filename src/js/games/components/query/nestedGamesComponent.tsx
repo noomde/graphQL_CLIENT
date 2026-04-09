@@ -24,8 +24,8 @@ export default function NestedGamesComponent(): JSX.Element {
       <h1>Games with score and platforms</h1>
 
       <ul>
-        {games.items.map((game, index) => (
-          <li key={index}>
+        {games.items.map((game, id) => (
+          <li key={id}>
             <h2>{game.title}</h2>
 
             <p>Release Date: {game.releaseDate}</p>

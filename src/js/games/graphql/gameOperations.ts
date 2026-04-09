@@ -72,8 +72,8 @@ export const GET_NESTED_GAMES_QUERY = gql`
 `;
 
 export const GET_NESTED_GAME_QUERY = gql`
-  query getNestedGame{
-    game {
+  query getNestedGame($id: Int!) {
+    game(id: $id) {
       id
       metacriticId
       title
@@ -95,10 +95,6 @@ export const GET_NESTED_GAME_QUERY = gql`
         name
       }
     }
-    totalCount
-    page
-    limit
-    totalPages
   }
 `;
 
