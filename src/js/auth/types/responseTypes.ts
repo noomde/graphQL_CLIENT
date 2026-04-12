@@ -16,3 +16,12 @@ export type RegisterMutationData = {
     username: string;
   } | null;
 };
+
+/**
+ * Data type for the oauth login mutation response, containing the registered user's information.
+ */
+export type OauthMutationData = {
+  oauthLoginUser: {
+    token: string;
+  } | null;
+};
