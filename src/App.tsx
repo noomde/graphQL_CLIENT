@@ -17,6 +17,7 @@ import ScorePage from './js/scores/pages/scorePage.tsx';
 import LoginPage from './js/auth/pages/loginPage.tsx';
 import RegisterPage from './js/auth/pages/registerPage.tsx';
 import LogoutPage from './js/auth/pages/logoutPage.tsx';
+import OauthPage from './js/auth/pages/oauthPage.tsx'
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/logout" element={<LogoutPage />} />
+      <Route path="/oauth/callback" element={<OauthPage />} />
     </Routes>
   );
 }
