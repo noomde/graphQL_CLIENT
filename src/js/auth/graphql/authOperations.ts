@@ -16,3 +16,19 @@ export const LOGIN_MUTATION = gql`
     }
   }
 `;
+
+export const OAUTH_LOGIN_MUTATION = gql`
+  mutation oauthLoginUser(
+    $provider: String!
+    $providerId: String!
+    $username: String
+  ) {
+    oauthLoginUser(
+      provider: $provider
+      providerId: $providerId
+      username: $username
+    ) {
+      token
+    }
+  }
+`;
