@@ -1,12 +1,5 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  type ReactNode,
-} from 'react';
+import { createContext, useState, type ReactNode } from 'react';
 import { useApolloClient } from '@apollo/client/react';
-import { restoreUser } from '../utils/restoreUser.ts';
 import type {
   DecodedUser,
   AuthContextType,
@@ -17,14 +10,14 @@ import {
   registerAction,
   logoutAction,
 } from '../services/authActions.ts';
+import { restoreUser } from '../utils/restoreUser.ts';
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const client = useApolloClient();
 
-  const [user, setUser] = useState<DecodedUser | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState<DecodedUser | null>(() => restoreUser());
 
   /**
    * Logs in the user by calling the login action with the provided credentials and updating the user state.
@@ -55,33 +48,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return logoutAction(setUser);
   }
 
-  useEffect(() => {
-    setUser(restoreUser());
-    setLoading(false);
-  }, []);
-
   return (
     <AuthContext.Provider
       value={{
         user,
         isAuthenticated: !!user,
-        loading,
+        loading: false,
         login,
         register,
         logout,
       }}
     >
-      {loading ? <div>Loading...</div> : children}
+      {children}
     </AuthContext.Provider>
   );
-}
-
-export function useAuth() {
-  const context = useContext(AuthContext);
-
-  if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
-
-  return context;
 }
