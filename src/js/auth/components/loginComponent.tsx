@@ -1,6 +1,7 @@
 import { useState, type JSX } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth.ts';
+import { handleGithubLogin } from '../utils/handleGithubLogin.ts';
 
 /**
  * Login component allows users to login using their credentials.
@@ -57,7 +58,11 @@ export default function LoginComponent(): JSX.Element {
       />
 
       <button className="login-button" type="submit" disabled={loading}>
-        { loading ? 'Logging in...' : 'Login' }
+        {loading ? 'Logging in...' : 'Login'}
+      </button>
+
+      <button type="button" onClick={handleGithubLogin}>
+        Login with GitHub
       </button>
     </form>
   );
