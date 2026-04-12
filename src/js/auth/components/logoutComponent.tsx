@@ -1,5 +1,5 @@
 import { type JSX } from 'react';
-import { useAuth } from '../context/authContext.tsx';
+import { useAuth } from '../hooks/useAuth.ts';
 import { useNavigate } from 'react-router-dom';
 
 /**

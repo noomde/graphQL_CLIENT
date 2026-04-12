@@ -1,6 +1,6 @@
 import { useState, type JSX } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/authContext.tsx';
+import { useAuth } from '../hooks/useAuth.ts';
 
 /**
  * Register component allows users to register using their credentials.
