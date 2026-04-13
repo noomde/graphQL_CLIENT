@@ -2,9 +2,9 @@
  * Exhanges github OAuth code for an access token.
  *
  * @param {string} code - The authorization code from github.
- * @returns {Promise<object>} The token response from github.
+ * @returns {Promise<string>} The token response from github.
  */
-export async function exchangeCodeForToken(code: string) {
+export async function exchangeCodeForToken(code: string): Promise<string> {
   const tokenResponse = await fetch(
     'https://github.com/login/oauth/access_token',
     {
@@ -23,5 +23,5 @@ export async function exchangeCodeForToken(code: string) {
 
   const tokenData = await tokenResponse.json();
 
-  return tokenData;
+  return tokenData.access_token;
 }
