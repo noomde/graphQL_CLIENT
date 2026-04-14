@@ -21,7 +21,7 @@ export const OAUTH_LOGIN_MUTATION = gql`
   mutation oauthLoginUser(
     $provider: String!
     $providerId: String!
-    $username: String
+    $username: String!
   ) {
     oauthLoginUser(
       provider: $provider

@@ -17,14 +17,20 @@ export default function OauthCallbackComponent(): JSX.Element {
       try {
         const params = new URLSearchParams(window.location.search);
         const code = params.get('code');
+        const returnedState = params.get('state');
+        const savedState = sessionStorage.getItem('github_oauth_state');
 
-        if (!code) {
+        if (!code || !returnedState || returnedState !== savedState) {
           navigate('/login');
-          return;
+          throw new Error('Invalid OAuth state');
         }
 
-        const response = await fetch(`/auth/github/callback?code=${code}`);
+        const response = await fetch(
+          `http://localhost:3000/api/auth/github/callback?code=${code}`,
+        );
         const user = await response.json();
+
+        console.log('github user from server:', user);
 
         const payload = await oauthLogin({
           provider: 'github',

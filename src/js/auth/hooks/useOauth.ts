@@ -8,15 +8,20 @@ import type { OauthMutationData } from '../types/responseTypes.ts';
  * @returns The jwt token.
  */
 export function useOAuthLogin() {
-  const [mutate, { loading, error }] = useMutation<OauthMutationData>(OAUTH_LOGIN_MUTATION);
+  const [mutate, { loading, error }] =
+    useMutation<OauthMutationData>(OAUTH_LOGIN_MUTATION);
 
   async function oauthLogin(input: {
     provider: string;
     providerId: string;
-    username?: string;
+    username: string;
   }) {
     const result = await mutate({
-      variables: input,
+      variables: {
+        provider: input.provider,
+        providerId: input.providerId,
+        username: input.username,
+      },
     });
 
     return result.data?.oauthLoginUser ?? null;
