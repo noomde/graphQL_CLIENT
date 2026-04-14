@@ -1,8 +1,7 @@
-import { createContext, useState, type ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
 import { useApolloClient } from '@apollo/client/react';
 import type {
   DecodedUser,
-  AuthContextType,
   AuthCredentials,
 } from '../types/authTypes.ts';
 import {
@@ -11,8 +10,7 @@ import {
   logoutAction,
 } from '../services/authActions.ts';
 import { restoreUser } from '../utils/restoreUser.ts';
-
-const AuthContext = createContext<AuthContextType | null>(null);
+import { AuthContext } from '../hooks/useAuth.ts';
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const client = useApolloClient();
