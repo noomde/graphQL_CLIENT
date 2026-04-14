@@ -35,7 +35,7 @@ export default function CreateGameComponent(): JSX.Element {
     setLoading(true);
 
     try {
-      await createGame({
+      const game = await createGame({
         title,
         releaseDate,
         rating: rating as Rating,
@@ -44,7 +44,7 @@ export default function CreateGameComponent(): JSX.Element {
         developer,
         publisher,
       });
-      navigate('home'); // TODO add the actual path
+      navigate(`/games/${game?.id}`);
     } catch (error) {
       setError('Failed to create game, please try again.');
       console.error('Create game error:', error);

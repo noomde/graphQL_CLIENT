@@ -40,7 +40,7 @@ export default function UpdateGameComponent({
     setLoading(true);
 
     try {
-      await updateGame(id, {
+      const game = await updateGame(id, {
         title,
         releaseDate,
         rating: rating as Rating,
@@ -49,7 +49,7 @@ export default function UpdateGameComponent({
         developer,
         publisher,
       });
-      navigate('home'); // TODO add the actual path
+      navigate(`/games/${game?.id}`);
     } catch (error) {
       setError('Failed to update game, please try again.');
       console.error('Update game error:', error);

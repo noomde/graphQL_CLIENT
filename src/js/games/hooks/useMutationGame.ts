@@ -2,7 +2,7 @@ import { useMutation } from '@apollo/client/react';
 import {
   CREATE_GAME_MUTATION,
   UPDATE_GAME_MUTATION,
-  DELETE_GAME_MUTATION
+  DELETE_GAME_MUTATION,
 } from '../graphql/gameOperations.ts';
 import type { CreateGameInput, UpdateGameInput } from '../types/inputType.ts';
 import type {
@@ -25,9 +25,17 @@ export function useCreateGame() {
     useMutation<CreateGameMutationData>(CREATE_GAME_MUTATION);
 
   async function createGame(input: CreateGameInput) {
+    const mappedInput = mapCreateGameInputToBackend(input);
+
     const result = await mutate({
       variables: {
-        input: mapCreateGameInputToBackend(input),
+        title: mappedInput.title,
+        genres: mappedInput.genres,
+        releaseDate: mappedInput.releaseDate,
+        rating: mappedInput.rating,
+        description: mappedInput.description,
+        developer: mappedInput.developer,
+        publisher: mappedInput.publisher,
       },
     });
 
@@ -52,10 +60,18 @@ export function useUpdateGame() {
     useMutation<UpdateGameMutationData>(UPDATE_GAME_MUTATION);
 
   async function updateGame(id: number, input: UpdateGameInput) {
+    const mappedInput = mapUpdateGameInputToBackend(input);
+
     const result = await mutate({
       variables: {
         id,
-        input: mapUpdateGameInputToBackend(input),
+        title: mappedInput.title,
+        genres: mappedInput.genres,
+        releaseDate: mappedInput.releaseDate,
+        rating: mappedInput.rating,
+        description: mappedInput.description,
+        developer: mappedInput.developer,
+        publisher: mappedInput.publisher,
       },
     });
 
@@ -76,7 +92,8 @@ export function useUpdateGame() {
  * @returns A function to delete a game and the mutation state.
  */
 export function useDeleteGame() {
-  const [mutate, { data, loading, error}] = useMutation<DeleteGameMutationData>(DELETE_GAME_MUTATION);
+  const [mutate, { data, loading, error }] =
+    useMutation<DeleteGameMutationData>(DELETE_GAME_MUTATION);
 
   async function deleteGame(id: number) {
     const result = await mutate({
