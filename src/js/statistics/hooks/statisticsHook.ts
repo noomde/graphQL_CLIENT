@@ -16,13 +16,15 @@ import { useQuery } from '@apollo/client/react';
  * @returns the average score per platform data.
  */
 export function useScorePerPlatform() {
-    const { data, loading, error } = useQuery<scorePerPlatformData>(GET_AVERAGE_SCORE_PER_PLATFORM_QUERY)
+  const { data, loading, error } = useQuery<scorePerPlatformData>(
+    GET_AVERAGE_SCORE_PER_PLATFORM_QUERY,
+  );
 
-    return {
-        scorePerPlatform: data?.averageScorePerPlatform ?? [],
-        loading,
-        error
-    }
+  return {
+    scorePerPlatform: data?.averageScorePerPlatform ?? [],
+    loading,
+    error,
+  };
 }
 
 /**
@@ -31,13 +33,15 @@ export function useScorePerPlatform() {
  * @returns the average score per developer data.
  */
 export function useScorePerDeveloper() {
-    const { data, loading, error } = useQuery<scorePerDeveloperData>(GET_AVERAGE_SCORE_PER_DEVELOPER_QUERY)
+  const { data, loading, error } = useQuery<scorePerDeveloperData>(
+    GET_AVERAGE_SCORE_PER_DEVELOPER_QUERY,
+  );
 
-    return {
-        scorePerDeveloper: data?.averageScorePerDeveloper ?? [],
-        loading,
-        error
-    }
+  return {
+    scorePerDeveloper: data?.averageScorePerDeveloper ?? [],
+    loading,
+    error,
+  };
 }
 
 /**
@@ -46,11 +50,13 @@ export function useScorePerDeveloper() {
  * @returns the average score per publisher data.
  */
 export function useScorePerPublisher() {
-    const { data, loading, error } = useQuery<scorePerPublisherData>(GET_AVERAGE_SCORE_PER_PUBLISHER_QUERY)
+  const { data, loading, error } = useQuery<scorePerPublisherData>(
+    GET_AVERAGE_SCORE_PER_PUBLISHER_QUERY,
+  );
 
-    return {
-        scorePerPublisher: data?.averageScorePerPublisher ?? [],
-        loading,
-        error
-    }
+  return {
+    scorePerPublisher: data?.averageScorePerPublisher ?? [],
+    loading,
+    error,
+  };
 }
