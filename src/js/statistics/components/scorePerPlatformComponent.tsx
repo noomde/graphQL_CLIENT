@@ -6,7 +6,7 @@ import { useScorePerPlatform } from '../hooks/statisticsHook.ts';
  *
  * @returns A element with the average score per platform data.
  */
-export default function ScoreComponent(): JSX.Element {
+export default function ScorePerPlatformComponent(): JSX.Element {
   const { scorePerPlatform, loading, error } = useScorePerPlatform();
 
   if (loading) {
