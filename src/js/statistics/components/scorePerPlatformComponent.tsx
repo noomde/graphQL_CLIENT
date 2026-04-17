@@ -15,6 +15,7 @@ import {
   getPaginatedChartData,
 } from '../../generic/helpers/chartHelper.ts';
 import LoadingOrErrorComponent from '../../generic/components/loadingOrErrorComponent.tsx';
+import { CustomTooltipComponent } from '../../generic/components/tooltipComponent.tsx';
 
 const PAGE_SIZE = 25;
 type Metric = 'averageMetascore' | 'medianMetascore';
@@ -69,7 +70,7 @@ export default function ScorePerPlatformComponent(): JSX.Element {
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="name" angle={-30} textAnchor="end" height={100} />
               <YAxis domain={[0, 100]} />
-              <Tooltip />
+              <Tooltip content={<CustomTooltipComponent />} />
               <Bar dataKey={metric} cursor="pointer" />
             </BarChart>
           </ResponsiveContainer>

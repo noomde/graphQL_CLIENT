@@ -19,6 +19,8 @@ import RegisterPage from './js/auth/pages/registerPage.tsx';
 import LogoutPage from './js/auth/pages/logoutPage.tsx';
 import OauthPage from './js/auth/pages/oauthPage.tsx'
 
+import StatisticsDashboardPage from './js/statistics/pages/statsticsDashboardPage.tsx';
+
 function App() {
   return (
     <Routes>
@@ -43,7 +45,7 @@ function App() {
       <Route path="/logout" element={<LogoutPage />} />
       <Route path="/oauth/callback" element={<OauthPage />} />
 
-
+      <Route path="/dashboard" element={<StatisticsDashboardPage />} />
     </Routes>
   );
 }

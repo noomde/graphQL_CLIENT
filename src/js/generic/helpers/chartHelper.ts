@@ -53,7 +53,7 @@ export function getPaginatedChartData(
   pageSize: number,
 ): Statistics[] {
   const startIndex = (page - 1) * pageSize;
-  const endIndex = startIndex - pageSize;
+  const endIndex = startIndex + pageSize;
 
   return sortedData.slice(startIndex, endIndex);
 }
