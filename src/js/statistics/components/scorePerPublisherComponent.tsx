@@ -29,7 +29,10 @@ export default function ScorePerPublisherComponent(): JSX.Element {
   const [page, setPage] = useState(1);
   const [metric, setMetric] = useState<Metric>('averageMetascore');
 
-  const sortedData = sortStatisticsData(scorePerPublisher, metric);
+  const sortedData = scorePerPublisher
+    ? sortStatisticsData(scorePerPublisher, metric)
+    : [];
+
   const totalPages = getTotalPages(sortedData, PAGE_SIZE);
   const chartData = getPaginatedChartData(sortedData, page, PAGE_SIZE);
 
