@@ -14,6 +14,7 @@ import {
   getTotalPages,
   getPaginatedChartData,
 } from '../../generic/helpers/chartHelper.ts';
+import LoadingOrErrorComponent from '../../generic/components/loadingOrErrorComponent.tsx';
 
 const PAGE_SIZE = 15;
 type Metric = 'averageMetascore' | 'medianMetascore';
@@ -26,17 +27,7 @@ type Metric = 'averageMetascore' | 'medianMetascore';
 export default function ScorePerPublisherComponent(): JSX.Element {
   const { scorePerPublisher, loading, error } = useScorePerPublisher();
   const [page, setPage] = useState(1);
-  const [metric, setMetric] = useState<Metric>(
-    'averageMetascore',
-  );
-
-  if (loading) {
-    return <p>Loading score per publisher...</p>;
-  }
-
-  if (error || !scorePerPublisher) {
-    return <p>Failed to load score per publisher, please try again</p>;
-  }
+  const [metric, setMetric] = useState<Metric>('averageMetascore');
 
   const sortedData = sortStatisticsData(scorePerPublisher, metric);
   const totalPages = getTotalPages(sortedData, PAGE_SIZE);
@@ -48,55 +39,65 @@ export default function ScorePerPublisherComponent(): JSX.Element {
   }
 
   return (
-    <section>
-      <h3>
-        Top publishers by{' '}
-        {metric === 'averageMetascore'
-          ? 'average metascore'
-          : 'median metascore'}
-      </h3>
+    <LoadingOrErrorComponent
+      loading={loading}
+      error={error}
+      data={scorePerPublisher}
+    >
+      <section>
+        <h3>
+          Top publishers by{' '}
+          {metric === 'averageMetascore'
+            ? 'average metascore'
+            : 'median metascore'}
+        </h3>
 
-      <label>
-        Metric:{' '}
-        <select value={metric} onChange={handleMetricChange}>
-          <option value="averageMetascore">Average metascore</option>
-          <option value="medianMetascore">Median metascore</option>
-        </select>
-      </label>
+        <label>
+          Metric:{' '}
+          <select value={metric} onChange={handleMetricChange}>
+            <option value="averageMetascore">Average metascore</option>
+            <option value="medianMetascore">Median metascore</option>
+          </select>
+        </label>
 
-      <div style={{ width: '100%', height: 500 }}>
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={chartData}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" angle={-30} textAnchor="end" height={100} />
-            <YAxis domain={[0, 100]} />
-            <Tooltip />
-            <Bar dataKey="averageMetascore" cursor="pointer" />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+        <div style={{ width: '100%', height: 500 }}>
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart data={chartData}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="name" angle={-30} textAnchor="end" height={100} />
+              <YAxis domain={[0, 100]} />
+              <Tooltip />
+              <Bar dataKey={metric} cursor="pointer" />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
 
-      <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
-        <button
-          onClick={() => setPage((currentPage) => Math.max(currentPage - 1, 1))}
-          disabled={page === 1}
-        >
-          Previous
-        </button>
+        <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+          <button
+            onClick={() =>
+              setPage((currentPage) => Math.max(currentPage - 1, 1))
+            }
+            disabled={page === 1}
+          >
+            Previous
+          </button>
 
-        <p>
-          Page {page} of {totalPages || 1}
-        </p>
+          <p>
+            Page {page} of {totalPages || 1}
+          </p>
 
-        <button
-          onClick={() =>
-            setPage((currentPage) => Math.min(currentPage + 1, totalPages || 1))
-          }
-          disabled={page === totalPages || totalPages === 0}
-        >
-          Next
-        </button>
-      </div>
-    </section>
+          <button
+            onClick={() =>
+              setPage((currentPage) =>
+                Math.min(currentPage + 1, totalPages || 1),
+              )
+            }
+            disabled={page === totalPages || totalPages === 0}
+          >
+            Next
+          </button>
+        </div>
+      </section>
+    </LoadingOrErrorComponent>
   );
 }
