@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 /**
  * ScorePage component serves as the page for a single score.
  *
- * @returns
+ * @returns The score page.
  */
 export default function ScorePage(): JSX.Element {
   const { id } = useParams<{ id: string }>();
