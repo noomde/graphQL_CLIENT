@@ -3,8 +3,8 @@
  */
 export type Statistics = {
   name: string;
-  averageMetascore: string;
-  medianMetascore: string;
+  averageMetascore: number;
+  medianMetascore: number;
   gameCount: number;
 };
 

@@ -42,6 +42,8 @@ function App() {
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/logout" element={<LogoutPage />} />
       <Route path="/oauth/callback" element={<OauthPage />} />
+
+
     </Routes>
   );
 }
