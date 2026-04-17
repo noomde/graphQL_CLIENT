@@ -36,6 +36,11 @@ export default function ScorePerPublisherComponent(): JSX.Element {
   const totalPages = getTotalPages(sortedData, PAGE_SIZE);
   const chartData = getPaginatedChartData(sortedData, page, PAGE_SIZE);
 
+  /**
+   * handles the change of metric view.
+   *
+   * @param event - The event handler.
+   */
   function handleMetricChange(event: React.ChangeEvent<HTMLSelectElement>) {
     setMetric(event.target.value as Metric);
     setPage(1);
