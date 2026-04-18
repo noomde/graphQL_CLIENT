@@ -1,10 +1,10 @@
-import { useState, type ChangeEvent, type JSX } from 'react';
+import { type JSX } from 'react';
 import { useGames } from '../../hooks/useGame.ts';
-import type { GamesFilter } from '../../types/inputType.ts';
+import { useGameListControls } from '../../hooks/useGamesControls.ts';
 import LoadingOrErrorComponent from '../../../generic/components/loadingOrErrorComponent.tsx';
 import { usePlatforms } from '../../../platforms/hooks/usePlatforms.ts';
-
-const LIMIT_OPTIONS = [25, 50, 100] as const;
+import GameFiltersComponent from '../../../generic/components/gameFiltersComponent.tsx';
+import PaginationComponent from '../../../generic/components/paginationControlsComponent.tsx';
 
 /**
  * A component for rendering all games.
@@ -13,68 +13,13 @@ const LIMIT_OPTIONS = [25, 50, 100] as const;
  */
 export default function GamesComponent(): JSX.Element {
   const { platforms } = usePlatforms();
-  const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState<(typeof LIMIT_OPTIONS)[number]>(25);
-  const [filter, setFilter] = useState<GamesFilter>({
-    platform: '',
-    genre: '',
-    developer: '',
-    publisher: '',
-  });
+  const controls = useGameListControls();
 
   const { games, loading, error } = useGames({
-    page,
-    limit,
-    filter: {
-      platform: filter.platform || undefined,
-      genre: filter.genre || undefined,
-      developer: filter.developer || undefined,
-      publisher: filter.publisher || undefined,
-    },
+    page: controls.page,
+    limit: controls.limit,
+    filter: controls.normalizedFilter,
   });
-
-  /**
-   * Handles filter field changes and resets page to 1.
-   *
-   * @param event - The input change event.
-   */
-  function handleFilterChange(event: ChangeEvent<HTMLInputElement>): void {
-    const { name, value } = event.target;
-
-    setPage(1);
-    setFilter((previous) => ({
-      ...previous,
-      [name]: value,
-    }));
-  }
-
-  /**
-   * Handles limit changes and resets page to 1.
-   *
-   * @param event - The select change event.
-   */
-  function handleLimitChange(event: ChangeEvent<HTMLSelectElement>): void {
-    setPage(1);
-    setLimit(Number(event.target.value) as (typeof LIMIT_OPTIONS)[number]);
-  }
-
-  /**
-   * Goes to the previous page.
-   */
-  function handlePreviousPage(): void {
-    if (page > 1) {
-      setPage((previous) => previous - 1);
-    }
-  }
-
-  /**
-   * Goes to the next page.
-   */
-  function handleNextPage(): void {
-    if (games && page < games.totalPages) {
-      setPage((previous) => previous + 1);
-    }
-  }
 
   if (!games) {
     return (
@@ -87,70 +32,21 @@ export default function GamesComponent(): JSX.Element {
       <div>
         <h2>Games</h2>
 
-        <div>
-          <h3>Filters</h3>
+        <GameFiltersComponent
+          filter={controls.filter}
+          platforms={platforms}
+          onFilterChange={controls.handleFilterChange}
+        />
 
-          <input
-            type="text"
-            name="platform"
-            list="platform-options"
-            placeholder="Filter by platform"
-            value={filter.platform ?? ''}
-            onChange={handleFilterChange}
-          />
-
-          <datalist id="platform-options">
-            {platforms.map((platform) => (
-              <option key={platform.name} value={platform.name} />
-            ))}
-          </datalist>
-
-          <input
-            type="text"
-            name="genre"
-            placeholder="Filter by genre"
-            value={filter.genre ?? ''}
-            onChange={handleFilterChange}
-          />
-
-          <input
-            type="text"
-            name="developer"
-            placeholder="Filter by developer"
-            value={filter.developer ?? ''}
-            onChange={handleFilterChange}
-          />
-
-          <input
-            type="text"
-            name="publisher"
-            placeholder="Filter by publisher"
-            value={filter.publisher ?? ''}
-            onChange={handleFilterChange}
-          />
-        </div>
-        <p>
-          Page {games.page} of {games.totalPages}
-        </p>
-
-        <button onClick={handlePreviousPage} disabled={page === 1}>
-          Previous
-        </button>
-
-        <button onClick={handleNextPage} disabled={page === games.totalPages}>
-          Next
-        </button>
-
-        <div>
-          <label htmlFor="limit">Games per page: </label>
-          <select id="limit" value={limit} onChange={handleLimitChange}>
-            {LIMIT_OPTIONS.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-        </div>
+        <PaginationComponent
+          page={controls.page}
+          totalPages={games.totalPages}
+          limit={controls.limit}
+          limitOptions={controls.limitOptions}
+          onPreviousPage={controls.handlePreviousPage}
+          onNextPage={() => controls.handleNextPage(games.totalPages)}
+          onLimitChange={controls.handleLimitChange}
+        />
 
         <ul>
           {games.items.map((game) => (
@@ -167,17 +63,6 @@ export default function GamesComponent(): JSX.Element {
           ))}
         </ul>
       </div>
-      <p>
-        Page {games.page} of {games.totalPages}
-      </p>
-
-      <button onClick={handlePreviousPage} disabled={page === 1}>
-        Previous
-      </button>
-
-      <button onClick={handleNextPage} disabled={page === games.totalPages}>
-        Next
-      </button>
     </LoadingOrErrorComponent>
   );
 }
