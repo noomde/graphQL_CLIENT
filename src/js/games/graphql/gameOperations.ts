@@ -17,8 +17,8 @@ export const GET_GAME_QUERY = gql`
 `;
 
 export const GET_GAMES_QUERY = gql`
-  query getGames{
-    games {
+  query getGames($page: Int, $limit: Int, $filter: GameFilterInput) {
+    games(page: $page, limit: $limit, filter: $filter) {
       items {
         id
         metacriticId
@@ -39,8 +39,8 @@ export const GET_GAMES_QUERY = gql`
 `;
 
 export const GET_NESTED_GAMES_QUERY = gql`
-  query getNestedGames{
-    games {
+  query getNestedGames($page: Int, $limit: Int, $filter: GameFilterInput) {
+    games(page: $page, limit: $limit, filter: $filter) {
       items {
         id
         metacriticId

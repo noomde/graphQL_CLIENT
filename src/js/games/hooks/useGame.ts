@@ -6,12 +6,13 @@ import {
   GET_NESTED_GAMES_QUERY,
   GET_NESTED_GAME_QUERY,
 } from '../graphql/gameOperations';
-import {
-  type GamesQueryData,
-  type GameQueryData,
-  type NestedGameQueryData,
-  type NestedGamesQueryData,
+import type {
+  GamesQueryData,
+  GameQueryData,
+  NestedGameQueryData,
+  NestedGamesQueryData,
 } from '../types/responseType';
+import type { GameOptions } from '../types/inputType.ts';
 
 /**
  * A custom hook for querying a specific game.
@@ -32,12 +33,21 @@ export function useGame(id: number) {
 }
 
 /**
- * A custom hook for querying all games.
+ * A custom hook for querying all games, with filter and pagination.
  *
+ * @param options - Pagination and filter options.
  * @returns The games data.
  */
-export function useGames() {
-  const { data, loading, error } = useQuery<GamesQueryData>(GET_GAMES_QUERY);
+export function useGames(options: GameOptions = {}) {
+  const { page = 1, limit = 25, filter } = options;
+
+  const { data, loading, error } = useQuery<GamesQueryData>(GET_GAMES_QUERY, {
+    variables: {
+      page,
+      limit,
+      filter,
+    },
+  });
 
   return {
     games: data?.games,
@@ -67,13 +77,23 @@ export function useNestedGame(id: number) {
 }
 
 /**
- * A custom hook for querying all games with nested data.
+ * A custom hook for querying all games with nested data, with filter and pagination.
  *
+ * @param options - Pagination and filter options.
  * @returns The games, scores and platforms data for all games.
  */
-export function useNestedGames() {
+export function useNestedGames(options: GameOptions = {}) {
+  const { page = 1, limit = 25, filter } = options;
+
   const { data, loading, error } = useQuery<NestedGamesQueryData>(
     GET_NESTED_GAMES_QUERY,
+    {
+      variables: {
+        page,
+        limit,
+        filter,
+      },
+    },
   );
 
   return {

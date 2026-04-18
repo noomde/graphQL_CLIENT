@@ -4,7 +4,7 @@ type Props<T> = {
   loading: boolean;
   error: unknown;
   data: T | null | undefined;
-  children: ReactNode;
+  children?: ReactNode;
 };
 
 /**
