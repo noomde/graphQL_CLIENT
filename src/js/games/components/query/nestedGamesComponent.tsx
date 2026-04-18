@@ -35,7 +35,7 @@ export default function NestedGamesComponent(): JSX.Element {
         <GameFiltersComponent
           filter={controls.filter}
           platforms={platforms}
-          onFilterChange={controls.handleFilterChange}
+          onApplyFilters={controls.applyFilters}
         />
 
         <PaginationComponent

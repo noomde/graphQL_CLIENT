@@ -1,4 +1,10 @@
-import { type ChangeEvent, type JSX } from 'react';
+import {
+  useEffect,
+  useState,
+  type ChangeEvent,
+  type KeyboardEvent,
+  type JSX,
+} from 'react';
 import type { GamesFilter } from '../../games/types/inputType';
 
 type PlatformOption = {
@@ -8,22 +14,35 @@ type PlatformOption = {
 type Props = {
   filter: GamesFilter;
   platforms: PlatformOption[];
-  onFilterChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onApplyFilters: (filter: GamesFilter) => void;
 };
 
-/**
- * A component for rendering game filters.
- *
- * @param filter - The current filter values.
- * @param platforms - Available platform options.
- * @param onFilterChange - Handles filter input changes.
- * @returns The filter inputs.
- */
 export default function GameFiltersComponent({
   filter,
   platforms,
-  onFilterChange,
+  onApplyFilters,
 }: Props): JSX.Element {
+  const [localFilter, setLocalFilter] = useState(filter);
+
+  useEffect(() => {
+    setLocalFilter(filter);
+  }, [filter]);
+
+  function handleChange(event: ChangeEvent<HTMLInputElement>): void {
+    const { name, value } = event.target;
+
+    setLocalFilter((previous) => ({
+      ...previous,
+      [name]: value,
+    }));
+  }
+
+  function handleKeyDown(event: KeyboardEvent<HTMLInputElement>): void {
+    if (event.key === 'Enter') {
+      onApplyFilters(localFilter);
+    }
+  }
+
   return (
     <div>
       <h3>Filters</h3>
@@ -33,8 +52,9 @@ export default function GameFiltersComponent({
         name="platform"
         list="platform-options"
         placeholder="Filter by platform"
-        value={filter.platform ?? ''}
-        onChange={onFilterChange}
+        value={localFilter.platform ?? ''}
+        onChange={handleChange}
+        onKeyDown={handleKeyDown}
       />
 
       <datalist id="platform-options">
@@ -47,25 +67,30 @@ export default function GameFiltersComponent({
         type="text"
         name="genre"
         placeholder="Filter by genre"
-        value={filter.genre ?? ''}
-        onChange={onFilterChange}
+        value={localFilter.genre ?? ''}
+        onChange={handleChange}
+        onKeyDown={handleKeyDown}
       />
 
       <input
         type="text"
         name="developer"
         placeholder="Filter by developer"
-        value={filter.developer ?? ''}
-        onChange={onFilterChange}
+        value={localFilter.developer ?? ''}
+        onChange={handleChange}
+        onKeyDown={handleKeyDown}
       />
 
       <input
         type="text"
         name="publisher"
         placeholder="Filter by publisher"
-        value={filter.publisher ?? ''}
-        onChange={onFilterChange}
+        value={localFilter.publisher ?? ''}
+        onChange={handleChange}
+        onKeyDown={handleKeyDown}
       />
+
+      <button onClick={() => onApplyFilters(localFilter)}>Apply filters</button>
     </div>
   );
 }

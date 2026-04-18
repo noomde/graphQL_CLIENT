@@ -15,13 +15,11 @@ type UseGameListControlsReturn = {
   filter: GamesFilter;
   normalizedFilter: GamesFilter;
   limitOptions: readonly LimitOption[];
-  handleFilterChange: (
-    event: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-  ) => void;
   handleLimitChange: (event: ChangeEvent<HTMLSelectElement>) => void;
   handlePreviousPage: () => void;
   handleNextPage: (totalPages?: number) => void;
   setFilterField: (name: FilterField, value: string) => void;
+  applyFilters: (newFilter: GamesFilter) => void;
 };
 
 /**
@@ -75,13 +73,16 @@ export function useGameListControls(): UseGameListControlsReturn {
   }
 
   /**
-   * Generic handler for input/select changes in filter UI.
+   * Applies all filters at once.
    */
-  function handleFilterChange(
-    event: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-  ): void {
-    const { name, value } = event.target;
-    setFilterField(name as FilterField, value);
+  function applyFilters(newFilter: GamesFilter): void {
+    updateParams({
+      platform: newFilter.platform,
+      genre: newFilter.genre,
+      developer: newFilter.developer,
+      publisher: newFilter.publisher,
+      page: 1,
+    });
   }
 
   /**
@@ -129,10 +130,10 @@ export function useGameListControls(): UseGameListControlsReturn {
     filter,
     normalizedFilter,
     limitOptions: LIMIT_OPTIONS,
-    handleFilterChange,
     handleLimitChange,
     handlePreviousPage,
     handleNextPage,
     setFilterField,
+    applyFilters,
   };
 }
