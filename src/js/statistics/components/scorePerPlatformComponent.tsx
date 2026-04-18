@@ -1,4 +1,5 @@
 import { useState, type JSX } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useScorePerPlatform } from '../hooks/statisticsHook.ts';
 import {
   BarChart,
@@ -29,6 +30,7 @@ export default function ScorePerPlatformComponent(): JSX.Element {
   const { scorePerPlatform, loading, error } = useScorePerPlatform();
   const [page, setPage] = useState(1);
   const [metric, setMetric] = useState<Metric>('averageMetascore');
+  const navigate = useNavigate();
 
   const sortedData = scorePerPlatform
     ? sortStatisticsData(scorePerPlatform, metric)
@@ -71,7 +73,19 @@ export default function ScorePerPlatformComponent(): JSX.Element {
               <XAxis dataKey="name" angle={-30} textAnchor="end" height={100} />
               <YAxis domain={[0, 100]} />
               <Tooltip content={<CustomTooltipComponent />} />
-              <Bar dataKey={metric} cursor="pointer" />
+              <Bar
+                dataKey={metric}
+                cursor="pointer"
+                onClick={(data) => {
+                  if (typeof data?.name !== 'string') {
+                    return;
+                  }
+
+                  navigate(
+                    `/nested-games?page=1&limit=25&platform=${encodeURIComponent(data.name)}`,
+                  );
+                }}
+              />
             </BarChart>
           </ResponsiveContainer>
         </div>
