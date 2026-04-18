@@ -8,7 +8,7 @@ const TOKEN_KEY = 'jwtToken';
  *
  * @returns {string | null} The JWT token if it exists, otherwise null.
  */
-export function getToken() {
+export function getToken(): string | null {
   return localStorage.getItem(TOKEN_KEY);
 }
 
