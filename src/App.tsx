@@ -21,6 +21,8 @@ import OauthPage from './js/auth/pages/oauthPage.tsx'
 
 import StatisticsDashboardPage from './js/statistics/pages/statsticsDashboardPage.tsx';
 
+import ProtectedRoute from './js/auth/components/protectedRoute.tsx'
+
 function App() {
   return (
     <Routes>
@@ -30,10 +32,6 @@ function App() {
       <Route path="/games/:id" element={<GamePage />} />
       <Route path="/nested-games" element={<NestedGamesPage />} />
       <Route path="/nested-games/:id" element={<NestedGamePage />} />
-
-      <Route path="/games/create" element={<CreateGamePage />} />
-      <Route path="/games/update/:id" element={<UpdateGamePage />} />
-      <Route path="/games/delete/:id" element={<DeleteGamePage />} />
 
       <Route path="/platforms" element={<PlatformsPage />} />
 
@@ -45,7 +43,12 @@ function App() {
       <Route path="/logout" element={<LogoutPage />} />
       <Route path="/oauth/callback" element={<OauthPage />} />
 
-      <Route path="/dashboard" element={<StatisticsDashboardPage />} />
+      <Route element={<ProtectedRoute />}>
+        <Route path="/games/create" element={<CreateGamePage />} />
+        <Route path="/games/update/:id" element={<UpdateGamePage />} />
+        <Route path="/games/delete/:id" element={<DeleteGamePage />} />
+        <Route path="/dashboard" element={<StatisticsDashboardPage />} />
+      </Route>
     </Routes>
   );
 }
