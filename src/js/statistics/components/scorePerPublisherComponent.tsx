@@ -1,5 +1,6 @@
 import { useState, type JSX } from 'react';
 import { useScorePerPublisher } from '../hooks/statisticsHook.ts';
+import { useNavigate } from 'react-router-dom';
 import {
   BarChart,
   Bar,
@@ -29,6 +30,7 @@ export default function ScorePerPublisherComponent(): JSX.Element {
   const { scorePerPublisher, loading, error } = useScorePerPublisher();
   const [page, setPage] = useState(1);
   const [metric, setMetric] = useState<Metric>('averageMetascore');
+  const navigate = useNavigate();
 
   const sortedData = scorePerPublisher
     ? sortStatisticsData(scorePerPublisher, metric)
@@ -76,7 +78,19 @@ export default function ScorePerPublisherComponent(): JSX.Element {
               <XAxis dataKey="name" angle={-30} textAnchor="end" height={100} />
               <YAxis domain={[0, 100]} />
               <Tooltip content={<CustomTooltipComponent />} />
-              <Bar dataKey={metric} cursor="pointer" />
+              <Bar
+                dataKey={metric}
+                cursor="pointer"
+                onClick={(data) => {
+                  if (typeof data?.name !== 'string') {
+                    return;
+                  }
+
+                  navigate(
+                    `/nested-games?page=1&limit=25&publisher=${encodeURIComponent(data.name)}`,
+                  );
+                }}
+              />
             </BarChart>
           </ResponsiveContainer>
         </div>
