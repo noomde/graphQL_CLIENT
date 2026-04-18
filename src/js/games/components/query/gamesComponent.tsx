@@ -2,6 +2,7 @@ import { useState, type ChangeEvent, type JSX } from 'react';
 import { useGames } from '../../hooks/useGame.ts';
 import type { GamesFilter } from '../../types/inputType.ts';
 import LoadingOrErrorComponent from '../../../generic/components/loadingOrErrorComponent.tsx';
+import { usePlatforms } from '../../../platforms/hooks/usePlatforms.ts';
 
 const LIMIT_OPTIONS = [25, 50, 100] as const;
 
@@ -11,6 +12,7 @@ const LIMIT_OPTIONS = [25, 50, 100] as const;
  * @returns An element with all game data.
  */
 export default function GamesComponent(): JSX.Element {
+  const { platforms } = usePlatforms();
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState<(typeof LIMIT_OPTIONS)[number]>(25);
   const [filter, setFilter] = useState<GamesFilter>({
@@ -91,10 +93,17 @@ export default function GamesComponent(): JSX.Element {
           <input
             type="text"
             name="platform"
+            list="platform-options"
             placeholder="Filter by platform"
             value={filter.platform ?? ''}
             onChange={handleFilterChange}
           />
+
+          <datalist id="platform-options">
+            {platforms.map((platform) => (
+              <option key={platform.name} value={platform.name} />
+            ))}
+          </datalist>
 
           <input
             type="text"
@@ -120,6 +129,17 @@ export default function GamesComponent(): JSX.Element {
             onChange={handleFilterChange}
           />
         </div>
+        <p>
+          Page {games.page} of {games.totalPages}
+        </p>
+
+        <button onClick={handlePreviousPage} disabled={page === 1}>
+          Previous
+        </button>
+
+        <button onClick={handleNextPage} disabled={page === games.totalPages}>
+          Next
+        </button>
 
         <div>
           <label htmlFor="limit">Games per page: </label>
