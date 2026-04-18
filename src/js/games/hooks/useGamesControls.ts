@@ -1,15 +1,13 @@
-import { useState, type ChangeEvent } from 'react';
+import { type ChangeEvent } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import type { GamesFilter } from '../types/inputType.ts';
 
 const LIMIT_OPTIONS = [25, 50, 100] as const;
-
 export type LimitOption = (typeof LIMIT_OPTIONS)[number];
+type FilterField = keyof GamesFilter;
 
 /**
- * A custom hook for handling game list filters, pagination and limit changes.
- *
- * @param totalPages - The total number of available pages.
- * @returns The current filter, pagination state and related handlers.
+ * Return type for the hook.
  */
 type UseGameListControlsReturn = {
   page: number;
@@ -17,10 +15,13 @@ type UseGameListControlsReturn = {
   filter: GamesFilter;
   normalizedFilter: GamesFilter;
   limitOptions: readonly LimitOption[];
-  handleFilterChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  handleFilterChange: (
+    event: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => void;
   handleLimitChange: (event: ChangeEvent<HTMLSelectElement>) => void;
   handlePreviousPage: () => void;
   handleNextPage: (totalPages?: number) => void;
+  setFilterField: (name: FilterField, value: string) => void;
 };
 
 /**
@@ -29,39 +30,89 @@ type UseGameListControlsReturn = {
  * @returns The current filter, pagination state and related handlers.
  */
 export function useGameListControls(): UseGameListControlsReturn {
-  const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState<LimitOption>(25);
-  const [filter, setFilter] = useState<GamesFilter>({
-    platform: '',
-    genre: '',
-    developer: '',
-    publisher: '',
-  });
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  function handleFilterChange(event: ChangeEvent<HTMLInputElement>): void {
-    const { name, value } = event.target;
+  const page = Number(searchParams.get('page') || '1');
+  const limit = Number(searchParams.get('limit') || '25') as LimitOption;
 
-    setPage(1);
-    setFilter((previous) => ({
-      ...previous,
+  const filter: GamesFilter = {
+    platform: searchParams.get('platform') || '',
+    genre: searchParams.get('genre') || '',
+    developer: searchParams.get('developer') || '',
+    publisher: searchParams.get('publisher') || '',
+  };
+
+  /**
+   * Core helper function for updating URL params.
+   *
+   * - Keeps existing params
+   * - Updates only the provided fields
+   * - Removes empty values from URL
+   */
+  function updateParams(updates: Record<string, string | number | undefined>) {
+    const nextParams = new URLSearchParams(searchParams);
+
+    Object.entries(updates).forEach(([key, value]) => {
+      if (value === undefined || value === '') {
+        nextParams.delete(key);
+        return;
+      }
+
+      nextParams.set(key, String(value));
+    });
+
+    setSearchParams(nextParams);
+  }
+
+  /**
+   * Sets a single filter field (e.g. platform, genre).
+   */
+  function setFilterField(name: FilterField, value: string): void {
+    updateParams({
       [name]: value,
-    }));
+      page: 1,
+    });
   }
 
+  /**
+   * Generic handler for input/select changes in filter UI.
+   */
+  function handleFilterChange(
+    event: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ): void {
+    const { name, value } = event.target;
+    setFilterField(name as FilterField, value);
+  }
+
+  /**
+   * Updates limit.
+   */
   function handleLimitChange(event: ChangeEvent<HTMLSelectElement>): void {
-    setPage(1);
-    setLimit(Number(event.target.value) as LimitOption);
+    updateParams({
+      limit: Number(event.target.value),
+      page: 1,
+    });
   }
 
+  /**
+   * Moves to previous page.
+   */
   function handlePreviousPage(): void {
     if (page > 1) {
-      setPage((previous) => previous - 1);
+      updateParams({
+        page: page - 1,
+      });
     }
   }
 
+  /**
+   * Moves to next page.
+   */
   function handleNextPage(totalPages?: number): void {
     if (totalPages && page < totalPages) {
-      setPage((previous) => previous + 1);
+      updateParams({
+        page: page + 1,
+      });
     }
   }
 
@@ -82,5 +133,6 @@ export function useGameListControls(): UseGameListControlsReturn {
     handleLimitChange,
     handlePreviousPage,
     handleNextPage,
+    setFilterField,
   };
 }
