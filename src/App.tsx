@@ -11,9 +11,6 @@ import DeleteGamePage from './js/games/pages/mutation/deleteGamePage.tsx';
 
 import PlatformsPage from './js/platforms/pages/platformsPage.tsx';
 
-import ScoresPage from './js/scores/pages/scoresPage.tsx';
-import ScorePage from './js/scores/pages/scorePage.tsx';
-
 import LoginPage from './js/auth/pages/loginPage.tsx';
 import RegisterPage from './js/auth/pages/registerPage.tsx';
 import LogoutPage from './js/auth/pages/logoutPage.tsx';
@@ -34,9 +31,6 @@ function App() {
       <Route path="/nested-games/:id" element={<NestedGamePage />} />
 
       <Route path="/platforms" element={<PlatformsPage />} />
-
-      <Route path="/scores" element={<ScoresPage />} />
-      <Route path="/scores/:id" element={<ScorePage />} />
 
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
