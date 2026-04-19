@@ -10,3 +10,8 @@ export type User = {
   name?: string;
   email?: string | null;
 };
+
+export type GithubTokenErrorResponse = {
+  error: string;
+  error_description?: string;
+};

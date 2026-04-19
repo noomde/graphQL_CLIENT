@@ -1,3 +1,14 @@
+import type { TokenResponse } from './types.ts';
+
+function isTokenResponse(data: unknown): data is TokenResponse {
+  return (
+    typeof data === 'object' &&
+    data !== null &&
+    'access_token' in data &&
+    typeof data.access_token === 'string'
+  );
+}
+
 /**
  * Exhanges github OAuth code for an access token.
  *
@@ -21,7 +32,11 @@ export async function exchangeCodeForToken(code: string): Promise<string> {
     },
   );
 
-  const tokenData = await tokenResponse.json();
+  const tokenData: unknown = await tokenResponse.json();
+
+  if (!isTokenResponse(tokenData)) {
+    throw new Error('GitHub token response did not include an access token');
+  }
 
   return tokenData.access_token;
 }
