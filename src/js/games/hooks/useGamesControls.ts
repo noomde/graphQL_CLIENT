@@ -30,8 +30,13 @@ type UseGameListControlsReturn = {
 export function useGameListControls(): UseGameListControlsReturn {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const page = Number(searchParams.get('page') || '1');
-  const limit = Number(searchParams.get('limit') || '25') as LimitOption;
+  const rawPage = Number(searchParams.get('page') || '1');
+  const page = rawPage > 0 ? rawPage : 1;
+
+  const rawLimit = Number(searchParams.get('limit') || '25') as LimitOption;
+  const limit = LIMIT_OPTIONS.includes(rawLimit as LimitOption)
+    ? (rawLimit as LimitOption)
+    : 25;
 
   const filter: GamesFilter = {
     platform: searchParams.get('platform') || '',
