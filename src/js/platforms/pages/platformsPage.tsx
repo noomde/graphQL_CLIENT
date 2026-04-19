@@ -1,4 +1,5 @@
 import PlatformsComponent from '../components/platformsComponent';
+import Header from '../../generic/components/header';
 import { type JSX } from 'react';
 
 /**
@@ -7,5 +8,10 @@ import { type JSX } from 'react';
  * @returns {JSX.Element} The platform page component.
  */
 export default function PlatformPage(): JSX.Element {
-  return <PlatformsComponent />;
+  return (
+    <>
+      <Header></Header>
+      <PlatformsComponent />;
+    </>
+  );
 }

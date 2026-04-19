@@ -1,4 +1,5 @@
 import DeleteGameComponent from '../../components/mutation/deleteGameComponent';
+import Header from '../../../generic/components/header';
 import { type JSX } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -10,5 +11,10 @@ import { useParams } from 'react-router-dom';
 export default function DeleteGamePage(): JSX.Element {
   const { id } = useParams<{ id: string }>();
 
-  return <DeleteGameComponent id={Number(id)} />;
+  return (
+    <>
+      <Header></Header>
+      <DeleteGameComponent id={Number(id)} />;
+    </>
+  );
 }

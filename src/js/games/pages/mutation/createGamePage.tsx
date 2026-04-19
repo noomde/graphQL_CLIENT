@@ -1,4 +1,5 @@
 import CreateGameComponent from '../../components/mutation/createGameComponent.tsx';
+import Header from '../../../generic/components/header.tsx';
 import { type JSX } from 'react';
 
 /**
@@ -7,5 +8,10 @@ import { type JSX } from 'react';
  * @returns {JSX.Element} The CreateGamePage component.
  */
 export default function CreateGamePage(): JSX.Element {
-  return <CreateGameComponent />;
+  return (
+    <>
+      <Header></Header>
+      <CreateGameComponent />;
+    </>
+  );
 }

@@ -1,4 +1,5 @@
 import RegisterComponent from '../components/registerComponent.tsx';
+import Header from '../../generic/components/header.tsx';
 import { type JSX } from 'react';
 
 /**
@@ -7,5 +8,10 @@ import { type JSX } from 'react';
  * @returns {JSX.Element} The registration page component.
  */
 export default function RegisterPage(): JSX.Element {
-    return <RegisterComponent />;
+  return (
+    <>
+      <Header></Header>
+      <RegisterComponent />;
+    </>
+  );
 }

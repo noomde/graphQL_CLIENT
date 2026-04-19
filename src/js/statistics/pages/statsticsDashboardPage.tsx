@@ -1,4 +1,5 @@
-import StatisticsDashboardComponent from "../components/statisticsDashboardComponent.tsx";
+import StatisticsDashboardComponent from '../components/statisticsDashboardComponent.tsx';
+import Header from '../../generic/components/header.tsx';
 import { type JSX } from 'react';
 
 /**
@@ -7,5 +8,10 @@ import { type JSX } from 'react';
  * @returns The statistics dashboard page.
  */
 export default function StatisticsDashboardPage(): JSX.Element {
-    return <StatisticsDashboardComponent />
+  return (
+    <>
+      <Header></Header>
+      <StatisticsDashboardComponent />;
+    </>
+  );
 }

@@ -1,4 +1,5 @@
 import LogoutComponent from '../components/logoutComponent.tsx';
+import Header from '../../generic/components/header.tsx';
 import { type JSX } from 'react';
 
 /**
@@ -7,5 +8,10 @@ import { type JSX } from 'react';
  * @returns {JSX.Element} The logout page component.
  */
 export default function LogoutPage(): JSX.Element {
-  return <LogoutComponent />;
+  return (
+    <>
+      <Header></Header>
+      <LogoutComponent />;
+    </>
+  );
 }

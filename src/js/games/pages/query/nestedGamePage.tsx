@@ -1,4 +1,5 @@
 import NestedGameComponent from '../../components/query/nestedGameComponent.tsx';
+import Header from '../../../generic/components/header.tsx';
 import { type JSX } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -10,5 +11,10 @@ import { useParams } from 'react-router-dom';
 export default function NestedGamePage(): JSX.Element {
   const { id } = useParams<{ id: string }>();
 
-  return <NestedGameComponent id={Number(id)} />;
+  return (
+    <>
+      <Header></Header>
+      <NestedGameComponent id={Number(id)} />;
+    </>
+  );
 }

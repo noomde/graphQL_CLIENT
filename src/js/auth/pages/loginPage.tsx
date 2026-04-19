@@ -1,4 +1,5 @@
 import LoginComponent from '../components/loginComponent.tsx';
+import Header from '../../generic/components/header.tsx';
 import { type JSX } from 'react';
 
 /**
@@ -7,5 +8,10 @@ import { type JSX } from 'react';
  * @returns {JSX.Element} The login page component.
  */
 export default function LoginPage(): JSX.Element {
-  return <LoginComponent />;
+  return (
+    <>
+      <Header></Header>
+      <LoginComponent />;
+    </>
+  );
 }
