@@ -1,4 +1,6 @@
 import { type JSX } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { useGames } from '../../hooks/useGame.ts';
 import { useGameListControls } from '../../hooks/useGamesControls.ts';
 import LoadingOrErrorComponent from '../../../generic/components/helpers/loadingOrErrorComponent.tsx';
@@ -14,6 +16,7 @@ import PaginationComponent from '../../../generic/components/helpers/paginationC
 export default function GamesComponent(): JSX.Element {
   const { platforms } = usePlatforms();
   const controls = useGameListControls();
+  const navigate = useNavigate();
 
   const { games, loading, error } = useGames({
     page: controls.page,
@@ -50,7 +53,11 @@ export default function GamesComponent(): JSX.Element {
 
         <ul>
           {games.items.map((game) => (
-            <li key={game.id}>
+            <li
+              key={game.id}
+              onClick={() => navigate(`/games/${game.id}`)}
+              style={{ cursor: 'pointer' }}
+            >
               <h2>{game.title}</h2>
               <p>Release Date: {game.releaseDate}</p>
               <p>Rating: {game.rating}</p>
