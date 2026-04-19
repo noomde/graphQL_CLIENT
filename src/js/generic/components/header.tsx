@@ -9,7 +9,7 @@ export default function Header() {
       <nav>
         <Link to="/">Home</Link>
         <Link to="/nested-games">Games</Link>
-        <Link to="/platforms"></Link>
+        <Link to="/platforms">Platforms</Link>
 
         {loggedIn && (
           <>

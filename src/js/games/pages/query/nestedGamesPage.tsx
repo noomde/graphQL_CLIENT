@@ -1,4 +1,5 @@
 import NestedGamesComponent from '../../components/query/nestedGamesComponent.tsx';
+import Header from '../../../generic/components/header.tsx';
 import { type JSX } from 'react';
 
 /**
@@ -7,5 +8,10 @@ import { type JSX } from 'react';
  * @returns {JSX.Element} The NestedGamesPage component.
  */
 export default function NestedGamesPage(): JSX.Element {
-  return <NestedGamesComponent />;
+  return (
+    <>
+      <Header />
+      <NestedGamesComponent />
+    </>
+  );
 }
