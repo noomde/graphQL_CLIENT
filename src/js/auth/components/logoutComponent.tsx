@@ -16,7 +16,7 @@ export default function LogoutComponent(): JSX.Element {
    */
   function handleLogout() {
     logout();
-    navigate('home'); // TODO add the actual path
+    navigate('/home');
   }
 
   return (

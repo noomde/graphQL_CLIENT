@@ -27,7 +27,7 @@ export default function DeleteGameComponent({
 
     try {
       await deleteGame(id);
-      navigate('home'); // TODO add the actual path
+      navigate('/home');
     } catch (error) {
       setError('Failed to delete game, please try again.');
       console.error('Delete game error:', error);

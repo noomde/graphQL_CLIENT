@@ -30,7 +30,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   /**
    * Registers a new user by calling the register action with the provided credentials.
    *
-   * @param credentials - The user's registration credentials (username, email, and password).
+   * @param credentials - The user's registration credentials (username and password).
    * @returns A promise that resolves when the registration action is complete.
    */
   function register(credentials: AuthCredentials) {

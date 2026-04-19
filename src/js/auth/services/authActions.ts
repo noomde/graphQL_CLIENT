@@ -1,5 +1,8 @@
 import { ApolloClient } from '@apollo/client';
-import { LOGIN_MUTATION, REGISTER_MUTATION } from '../graphql/authOperations.ts';
+import {
+  LOGIN_MUTATION,
+  REGISTER_MUTATION,
+} from '../graphql/authOperations.ts';
 import { setToken, removeToken, decodeToken } from '../utils/token.ts';
 import type { AuthCredentials, DecodedUser } from '../types/authTypes.ts';
 import type {
@@ -25,7 +28,10 @@ export async function loginAction(
 ) {
   const { data } = await client.mutate<LoginMutationData>({
     mutation: LOGIN_MUTATION,
-    variables: { input: credentials },
+    variables: {
+      username: credentials.username,
+      password: credentials.password,
+    },
   });
 
   const token = data?.loginUser?.token;
@@ -51,7 +57,10 @@ export async function registerAction(
 ) {
   const { data } = await client.mutate<RegisterMutationData>({
     mutation: REGISTER_MUTATION,
-    variables: { input: credentials },
+    variables: {
+      username: credentials.username,
+      password: credentials.password,
+    },
   });
 
   if (!data?.registerUser) {

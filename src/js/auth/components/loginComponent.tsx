@@ -30,7 +30,7 @@ export default function LoginComponent(): JSX.Element {
 
     try {
       await login({ username, password });
-      navigate('/home');
+      navigate('/dashboard');
     } catch (error) {
       setError('Login failed. Please check your credentials.');
       console.error('Login error:', error);

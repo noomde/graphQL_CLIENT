@@ -1,5 +1,8 @@
 import { type JSX } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { useNestedGame } from '../../hooks/useGame.ts';
+import LoadingOrErrorComponent from '../../../generic/components/helpers/loadingOrErrorComponent.tsx';
 
 /**
  * A component for rendering a game with nested data (score and platforms).
@@ -13,39 +16,47 @@ export default function NestedGameComponent({
   id: number;
 }): JSX.Element {
   const { game, loading, error } = useNestedGame(id);
+  const navigate = useNavigate();
 
-  // TODO update to make more less repetetive
-  if (loading) {
-    return <p>Loading game...</p>;
+  if (!game) {
+    return (
+      <LoadingOrErrorComponent loading={loading} error={error} data={game} />
+    );
   }
 
-  if (error || !game) {
-    return <p>Failed to load game, please try again</p>;
-  }
-
-  // TODO add the real rendering of data and the actual url for metacritic.
   return (
-    <div>
-      <h2>{game.title}</h2>
+    <LoadingOrErrorComponent loading={loading} error={error} data={game}>
+      <div>
+        <h2>{game.title}</h2>
 
-      <p>Release Date: {game.releaseDate}</p>
-      <p>Rating: {game.rating}</p>
-      <p>Genres: {game.genres}</p>
-      <p>Description: {game.description}</p>
-      <p>Developer: {game.developer}</p>
-      <p>Publisher: {game.publisher}</p>
-      <p>Metacritic url: {game.metacriticId}</p>
+        <p>Release Date: {game.releaseDate}</p>
+        <p>Rating: {game.rating}</p>
+        <p>Genres: {game.genres}</p>
+        <p>Description: {game.description}</p>
+        <p>Developer: {game.developer}</p>
+        <p>Publisher: {game.publisher}</p>
+        <p>Metacritic url: {game.metacriticId}</p>
 
-      <p>
-        Platforms: {game.platforms.map((platform) => platform.name).join(', ')}
-      </p>
+        <p>
+          Platforms:{' '}
+          {game.platforms.map((platform) => platform.name).join(', ')}
+        </p>
 
-      <p>Metascore: {game.scores?.metascore}</p>
-      <p>Metascore Count: {game.scores?.metascoreCount}</p>
-      <p>Metascore Sentiment: {game.scores?.metascoreSentiment}</p>
-      <p>UserScore: {game.scores?.userScore}</p>
-      <p>UserScore Count: {game.scores?.userScoreCount}</p>
-      <p>UserScore Sentiment: {game.scores?.userScoreSentiment}</p>
-    </div>
+        <p>Metascore: {game.scores?.metascore}</p>
+        <p>Metascore Count: {game.scores?.metascoreCount}</p>
+        <p>Metascore Sentiment: {game.scores?.metascoreSentiment}</p>
+        <p>UserScore: {game.scores?.userScore}</p>
+        <p>UserScore Count: {game.scores?.userScoreCount}</p>
+        <p>UserScore Sentiment: {game.scores?.userScoreSentiment}</p>
+
+        <button onClick={() => navigate(`/games/update/:${game.id}`)}>
+          UPDATE GAME
+        </button>
+
+        <button onClick={() => navigate(`/games/delete/:${game.id}`)}>
+          DELETE GAME
+        </button>
+      </div>
+    </LoadingOrErrorComponent>
   );
 }

@@ -26,7 +26,7 @@ export default function RegisterComponent(): JSX.Element {
 
     try {
       await register({ username, password });
-      navigate('home'); // TODO add the actual path
+      navigate('/login');
     } catch (error) {
       setError('Registration failed. Please check your credentials.');
       console.error('Registration error:', error);

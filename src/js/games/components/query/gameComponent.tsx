@@ -1,5 +1,8 @@
 import { type JSX } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { useGame } from '../../hooks/useGame.ts';
+import LoadingOrErrorComponent from '../../../generic/components/helpers/loadingOrErrorComponent.tsx';
 
 /**
  * A component for rendering a game.
@@ -9,28 +12,35 @@ import { useGame } from '../../hooks/useGame.ts';
  */
 export default function GameComponent({ id }: { id: number }): JSX.Element {
   const { game, loading, error } = useGame(id);
+  const navigate = useNavigate();
 
-  // TODO update to make more less repetetive
-  if (loading) {
-    return <p>Loading game...</p>;
-  }
+    if (!game) {
+      return (
+        <LoadingOrErrorComponent loading={loading} error={error} data={game} />
+      );
+    }
 
-  if (error || !game) {
-    return <p>Failed to load game, please try again</p>;
-  }
-
-  // TODO add the real rendering of data and the actual url for metacritic.
   return (
-    <div>
-      <h1>{game.title}</h1>
+    <LoadingOrErrorComponent loading={loading} error={error} data={game}>
+      <div>
+        <h1>{game.title}</h1>
 
-      <p>Release Date: {game.releaseDate}</p>
-      <p>Rating: {game.rating}</p>
-      <p>Genres: {game.genres}</p>
-      <p>Description: {game.description}</p>
-      <p>Developer: {game.developer}</p>
-      <p>Publisher: {game.publisher}</p>
-      <p>Metacritic url: {game.metacriticId}</p>
-    </div>
+        <p>Release Date: {game.releaseDate}</p>
+        <p>Rating: {game.rating}</p>
+        <p>Genres: {game.genres}</p>
+        <p>Description: {game.description}</p>
+        <p>Developer: {game.developer}</p>
+        <p>Publisher: {game.publisher}</p>
+        <p>Metacritic url: {game.metacriticId}</p>
+
+        <button onClick={() => navigate(`/games/update/:${game.id}`)}>
+          UPDATE GAME
+        </button>
+
+        <button onClick={() => navigate(`/games/delete/:${game.id}`)}>
+          DELETE GAME
+        </button>
+      </div>
+    </LoadingOrErrorComponent>
   );
 }
