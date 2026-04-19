@@ -1,4 +1,4 @@
-import { type Score } from '../../scores/types/responseTypes.ts';
+import { type Score } from './scorerResponseTypes.ts';
 import { type Platform } from '../../platforms/types/responseTypes.ts';
 
 /**
