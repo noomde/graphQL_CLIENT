@@ -1,5 +1,5 @@
 import { type JSX } from 'react';
-import { type CustomTooltipProps } from '../../statistics/types/tooltipData.ts';
+import { type CustomTooltipProps } from '../../../statistics/types/tooltipData.ts';
 
 /**
  * Renders a custom tooltip for the chart.

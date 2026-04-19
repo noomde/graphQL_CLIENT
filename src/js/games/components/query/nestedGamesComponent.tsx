@@ -1,10 +1,10 @@
 import { type JSX } from 'react';
 import { useNestedGames } from '../../hooks/useGame.ts';
 import { useGameListControls } from '../../hooks/useGamesControls.ts';
-import LoadingOrErrorComponent from '../../../generic/components/loadingOrErrorComponent.tsx';
+import LoadingOrErrorComponent from '../../../generic/components/helpers/loadingOrErrorComponent.tsx';
 import { usePlatforms } from '../../../platforms/hooks/usePlatforms.ts';
-import GameFiltersComponent from '../../../generic/components/gameFiltersComponent.tsx';
-import PaginationComponent from '../../../generic/components/paginationControlsComponent.tsx';
+import GameFiltersComponent from '../../../generic/components/helpers/gameFiltersComponent.tsx';
+import PaginationComponent from '../../../generic/components/helpers/paginationControlsComponent.tsx';
 
 /**
  * A component for rendering all games with their scores and platforms.

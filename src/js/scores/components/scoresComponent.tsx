@@ -1,6 +1,6 @@
 import { type JSX } from 'react';
 import { useScores } from '../hooks/scoreHook.ts';
-import LoadingOrErrorComponent from '../../generic/components/loadingOrErrorComponent.tsx';
+import LoadingOrErrorComponent from '../../generic/components/helpers/loadingOrErrorComponent.tsx';
 
 /**
  * A component for rendering all the scores.

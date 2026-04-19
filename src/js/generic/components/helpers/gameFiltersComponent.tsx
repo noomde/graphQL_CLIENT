@@ -5,7 +5,7 @@ import {
   type KeyboardEvent,
   type JSX,
 } from 'react';
-import type { GamesFilter } from '../../games/types/inputType';
+import type { GamesFilter } from '../../../games/types/inputType';
 
 type PlatformOption = {
   name: string;

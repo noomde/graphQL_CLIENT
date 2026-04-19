@@ -15,8 +15,8 @@ import {
   getTotalPages,
   getPaginatedChartData,
 } from '../../generic/helpers/chartHelper.ts';
-import LoadingOrErrorComponent from '../../generic/components/loadingOrErrorComponent.tsx';
-import { CustomTooltipComponent } from '../../generic/components/tooltipComponent.tsx';
+import LoadingOrErrorComponent from '../../generic/components/helpers/loadingOrErrorComponent.tsx';
+import { CustomTooltipComponent } from '../../generic/components/helpers/tooltipComponent.tsx';
 
 const PAGE_SIZE = 15;
 type Metric = 'averageMetascore' | 'medianMetascore';

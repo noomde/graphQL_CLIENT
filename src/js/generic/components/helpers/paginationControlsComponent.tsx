@@ -1,5 +1,5 @@
 import { type ChangeEvent, type JSX } from 'react';
-import type { LimitOption } from '../../games/hooks/useGamesControls.ts';
+import type { LimitOption } from '../../../games/hooks/useGamesControls.ts';
 
 type Props = {
   page: number;
