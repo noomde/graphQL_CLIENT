@@ -15,6 +15,9 @@ export default function LoginComponent(): JSX.Element {
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
+  const params = new URLSearchParams(window.location.search);
+
+  const sessionExpired = params.get('sessionExpired') === '1';
 
   /**
    * Handles the form submission for logging in the user from authContext.
@@ -27,7 +30,7 @@ export default function LoginComponent(): JSX.Element {
 
     try {
       await login({ username, password });
-      navigate('home'); // TODO add the actual path
+      navigate('/home');
     } catch (error) {
       setError('Login failed. Please check your credentials.');
       console.error('Login error:', error);
@@ -64,6 +67,12 @@ export default function LoginComponent(): JSX.Element {
       <button type="button" onClick={handleGithubLogin}>
         Login with GitHub
       </button>
+
+      {sessionExpired && (
+        <p className="login-error">
+          Your session has expired. Please log in again.
+        </p>
+      )}
     </form>
   );
 }

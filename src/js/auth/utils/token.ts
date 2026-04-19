@@ -45,6 +45,10 @@ export function decodeToken(token: string) {
  * @returns True if the token has expired, otherwise false.
  */
 export function isTokenExpired(token: string) {
-  const decoded = decodeToken(token);
-  return decoded.exp * 1000 < Date.now();
+  try {
+    const decoded = decodeToken(token);
+    return decoded.exp * 1000 < Date.now();
+  } catch {
+    return true;
+  }
 }
