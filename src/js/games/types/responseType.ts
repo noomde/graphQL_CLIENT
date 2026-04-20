@@ -4,7 +4,7 @@ import { type Platform } from '../../platforms/types/responseTypes.ts';
 /**
  * Defines the game response data.
  */
-type Game = {
+export type Game = {
   id: number;
   metacriticId: number;
   title: string;

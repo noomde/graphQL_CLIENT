@@ -7,6 +7,7 @@ import LoadingOrErrorComponent from '../../../generic/components/helpers/loading
 import { usePlatforms } from '../../../platforms/hooks/usePlatforms.ts';
 import GameFiltersComponent from '../../../generic/components/helpers/gameFiltersComponent.tsx';
 import PaginationComponent from '../../../generic/components/helpers/paginationControlsComponent.tsx';
+import GameList from '../jsxElements/gamesList.tsx';
 
 /**
  * A component for rendering all games.
@@ -59,20 +60,7 @@ export default function GamesComponent(): JSX.Element {
 
             <ul>
               {games.items.map((game) => (
-                <li
-                  key={game.id}
-                  onClick={() => navigate(`/games/${game.id}`)}
-                  style={{ cursor: 'pointer' }}
-                >
-                  <h2>{game.title}</h2>
-                  <p>Release Date: {game.releaseDate}</p>
-                  <p>Rating: {game.rating}</p>
-                  <p>Genres: {game.genres}</p>
-                  <p>Description: {game.description}</p>
-                  <p>Developer: {game.developer}</p>
-                  <p>Publisher: {game.publisher}</p>
-                  <p>Metacritic url: {game.metacriticId}</p>
-                </li>
+                <GameList key={game.id} game={game} />
               ))}
             </ul>
           </>

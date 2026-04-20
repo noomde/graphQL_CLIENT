@@ -7,6 +7,7 @@ import LoadingOrErrorComponent from '../../../generic/components/helpers/loading
 import { usePlatforms } from '../../../platforms/hooks/usePlatforms.ts';
 import GameFiltersComponent from '../../../generic/components/helpers/gameFiltersComponent.tsx';
 import PaginationComponent from '../../../generic/components/helpers/paginationControlsComponent.tsx';
+import NestedGameList from '../jsxElements/nestedGamesList.tsx'
 
 /**
  * A component for rendering all games with their scores and platforms.
