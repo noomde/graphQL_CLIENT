@@ -3,6 +3,48 @@ import { useNavigate } from 'react-router-dom';
 import { useOAuthLogin } from '../hooks/useOauth';
 import { setToken } from '../utils/token';
 
+type GithubUser = {
+  id: number;
+  login: string;
+};
+
+function isGithubUser(value: unknown): value is GithubUser {
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    'id' in value &&
+    typeof value.id === 'number' &&
+    'login' in value &&
+    typeof value.login === 'string'
+  );
+}
+
+async function readGithubUser(code: string): Promise<GithubUser> {
+  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || window.location.origin;
+  const callbackUrl = new URL('/api/auth/github/callback', apiBaseUrl);
+  callbackUrl.searchParams.set('code', code);
+
+  const response = await fetch(callbackUrl);
+  const contentType = response.headers.get('content-type') ?? '';
+
+  if (!response.ok) {
+    throw new Error(`GitHub callback failed with status ${response.status}`);
+  }
+
+  if (!contentType.includes('application/json')) {
+    const bodyPreview = (await response.text()).slice(0, 120);
+    throw new Error(`GitHub callback returned ${contentType || 'unknown content type'}: ${bodyPreview}`);
+  }
+
+  const user: unknown = await response.json();
+
+  if (!isGithubUser(user)) {
+    throw new Error('GitHub callback did not return a valid user');
+  }
+
+  return user;
+}
+
 /**
  * Oauth callback component. Allows the user to login through github. The Github user info is sent to the graphql api.
  *
@@ -25,10 +67,7 @@ export default function OauthCallbackComponent(): JSX.Element {
           throw new Error('Invalid OAuth state');
         }
 
-        const response = await fetch(
-          `https://graphqlclient-production.up.railway.app/api/auth/github/callback?code=${code}`,
-        );
-        const user = await response.json();
+        const user = await readGithubUser(code);
 
         const payload = await oauthLogin({
           provider: 'github',
