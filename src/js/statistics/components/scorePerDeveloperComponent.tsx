@@ -50,31 +50,40 @@ export default function ScorePerDeveloperComponent(): JSX.Element {
       error={error}
       data={scorePerDeveloper}
     >
-      <section>
-        <h3>
-          Top developers by{' '}
-          {metric === 'averageMetascore'
-            ? 'average metascore'
-            : 'median metascore'}
-        </h3>
+      <section className="statisticsChartCard">
+        <div className="statisticsChartHeader">
+          <div>
+            <h2>
+              Top developers by{' '}
+              {metric === 'averageMetascore'
+                ? 'average metascore'
+                : 'median metascore'}
+            </h2>
 
-        <label>
-          Metric:{' '}
-          <select value={metric} onChange={handleMetricChange}>
-            <option value="averageMetascore">Average metascore</option>
-            <option value="medianMetascore">Median metascore</option>
-          </select>
-        </label>
+            <p className="statisticsNote">
+              OBS: This chart only shows developers with at least 2 games.
+            </p>
+          </div>
 
-        <div style={{ width: '100%', height: 500 }}>
+          <label className="statisticsMetric">
+            Metric
+            <select value={metric} onChange={handleMetricChange}>
+              <option value="averageMetascore">Average metascore</option>
+              <option value="medianMetascore">Median metascore</option>
+            </select>
+          </label>
+        </div>
+
+        <div className="statisticsChart">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={chartData}>
-              <CartesianGrid strokeDasharray="3 3" />
+              <CartesianGrid strokeDasharray="3 3" stroke="#d9d4cd" />
               <XAxis dataKey="name" angle={-30} textAnchor="end" height={100} />
               <YAxis domain={[0, 100]} />
               <Tooltip content={<CustomTooltipComponent />} />
               <Bar
                 dataKey={metric}
+                fill="#ea7a2f"
                 cursor="pointer"
                 onClick={(data) => {
                   if (typeof data?.name !== 'string') {
@@ -90,8 +99,9 @@ export default function ScorePerDeveloperComponent(): JSX.Element {
           </ResponsiveContainer>
         </div>
 
-        <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+        <div className="statisticsPagination">
           <button
+            className="statisticsPageButton"
             onClick={() =>
               setPage((currentPage) => Math.max(currentPage - 1, 1))
             }
@@ -105,6 +115,7 @@ export default function ScorePerDeveloperComponent(): JSX.Element {
           </p>
 
           <button
+            className="statisticsPageButton"
             onClick={() =>
               setPage((currentPage) =>
                 Math.min(currentPage + 1, totalPages || 1),

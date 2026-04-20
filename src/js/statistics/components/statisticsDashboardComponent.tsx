@@ -3,6 +3,8 @@ import ScorePerDeveloperComponent from './scorePerDeveloperComponent.tsx';
 import ScorePerPlatformComponent from './scorePerPlatformComponent.tsx';
 import ScorePerPublisherComponent from './scorePerPublisherComponent.tsx';
 
+import '../../../css/statistics/statistics.css';
+
 type View = 'publisher' | 'developer' | 'platform';
 
 /**
@@ -24,35 +26,45 @@ export default function StatisticsDashboardComponent(): JSX.Element {
   }
 
   return (
-    <section>
-      <h2>Statistics dashboard</h2>
+    <main className="statisticsShell">
+      <aside className="statisticsSidebar">
+        <div className="statisticsTabs" aria-label="Statistics views">
+          <button
+            className="statisticsTab"
+            onClick={() => setView('publisher')}
+            disabled={isActive('publisher')}
+          >
+            Publisher
+          </button>
 
-      <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
-        <button
-          onClick={() => setView('publisher')}
-          disabled={isActive('publisher')}
-        >
-          Publisher
-        </button>
+          <button
+            className="statisticsTab"
+            onClick={() => setView('developer')}
+            disabled={isActive('developer')}
+          >
+            Developer
+          </button>
 
-        <button
-          onClick={() => setView('developer')}
-          disabled={isActive('developer')}
-        >
-          Developer
-        </button>
+          <button
+            className="statisticsTab"
+            onClick={() => setView('platform')}
+            disabled={isActive('platform')}
+          >
+            Platform
+          </button>
+        </div>
+      </aside>
 
-        <button
-          onClick={() => setView('platform')}
-          disabled={isActive('platform')}
-        >
-          Platform
-        </button>
-      </div>
+      <section className="statisticsContent">
+        <section className="statisticsHero">
+          <p className="statisticsEyebrow">Dashboard</p>
+          <h1 className="statisticsTitle">Statistics dashboard</h1>
+        </section>
 
-      {view === 'publisher' && <ScorePerPublisherComponent />}
-      {view === 'developer' && <ScorePerDeveloperComponent />}
-      {view === 'platform' && <ScorePerPlatformComponent />}
-    </section>
+        {view === 'publisher' && <ScorePerPublisherComponent />}
+        {view === 'developer' && <ScorePerDeveloperComponent />}
+        {view === 'platform' && <ScorePerPlatformComponent />}
+      </section>
+    </main>
   );
 }
