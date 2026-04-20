@@ -15,12 +15,16 @@ type Props = {
   filter: GamesFilter;
   platforms: PlatformOption[];
   onApplyFilters: (filter: GamesFilter) => void;
+  statsToggleLabel?: string;
+  onStatsToggle?: () => void;
 };
 
 export default function GameFiltersComponent({
   filter,
   platforms,
   onApplyFilters,
+  statsToggleLabel,
+  onStatsToggle,
 }: Props): JSX.Element {
   const [localFilter, setLocalFilter] = useState(filter);
 
@@ -44,53 +48,75 @@ export default function GameFiltersComponent({
   }
 
   return (
-    <div>
-      <h3>Filters</h3>
+    <section className="gameControlsPanel">
+      <div className="gameControlsHeader">
+        <h3>Filters</h3>
+      </div>
 
-      <input
-        type="text"
-        name="platform"
-        list="platform-options"
-        placeholder="Filter by platform"
-        value={localFilter.platform ?? ''}
-        onChange={handleChange}
-        onKeyDown={handleKeyDown}
-      />
+      <div className="filterGrid">
+        <input
+          className="filterInput"
+          type="text"
+          name="platform"
+          list="platform-options"
+          placeholder="Filter by platform"
+          value={localFilter.platform ?? ''}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+        />
 
-      <datalist id="platform-options">
-        {platforms.map((platform) => (
-          <option key={platform.name} value={platform.name} />
-        ))}
-      </datalist>
+        <datalist id="platform-options">
+          {platforms.map((platform) => (
+            <option key={platform.name} value={platform.name} />
+          ))}
+        </datalist>
 
-      <input
-        type="text"
-        name="genre"
-        placeholder="Filter by genre"
-        value={localFilter.genre ?? ''}
-        onChange={handleChange}
-        onKeyDown={handleKeyDown}
-      />
+        <input
+          className="filterInput"
+          type="text"
+          name="genre"
+          placeholder="Filter by genre"
+          value={localFilter.genre ?? ''}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+        />
 
-      <input
-        type="text"
-        name="developer"
-        placeholder="Filter by developer"
-        value={localFilter.developer ?? ''}
-        onChange={handleChange}
-        onKeyDown={handleKeyDown}
-      />
+        <input
+          className="filterInput"
+          type="text"
+          name="developer"
+          placeholder="Filter by developer"
+          value={localFilter.developer ?? ''}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+        />
 
-      <input
-        type="text"
-        name="publisher"
-        placeholder="Filter by publisher"
-        value={localFilter.publisher ?? ''}
-        onChange={handleChange}
-        onKeyDown={handleKeyDown}
-      />
+        <input
+          className="filterInput"
+          type="text"
+          name="publisher"
+          placeholder="Filter by publisher"
+          value={localFilter.publisher ?? ''}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+        />
 
-      <button onClick={() => onApplyFilters(localFilter)}>Apply filters</button>
-    </div>
+        <button
+          className="gameReadMore filterButton"
+          onClick={() => onApplyFilters(localFilter)}
+        >
+          Apply filters
+        </button>
+
+        {statsToggleLabel && onStatsToggle && (
+          <button
+            className="gameReadMore filterButton statsToggleButton"
+            onClick={onStatsToggle}
+          >
+            {statsToggleLabel}
+          </button>
+        )}
+      </div>
+    </section>
   );
 }

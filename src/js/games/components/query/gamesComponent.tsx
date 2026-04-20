@@ -9,6 +9,8 @@ import GameFiltersComponent from '../../../generic/components/helpers/gameFilter
 import PaginationComponent from '../../../generic/components/helpers/paginationControlsComponent.tsx';
 import GameList from '../jsxElements/gamesList.tsx';
 
+import '../../../../css/games/games.css'
+
 /**
  * A component for rendering all games.
  *
@@ -27,17 +29,21 @@ export default function GamesComponent(): JSX.Element {
 
   return (
     <LoadingOrErrorComponent loading={loading} error={error} data={games}>
-      <div>
-        <h1>Games</h1>
+      <div className="gamesPageShell">
+        <aside className="gamesSidebar">
+          <GameFiltersComponent
+            filter={controls.filter}
+            platforms={platforms}
+            onApplyFilters={controls.applyFilters}
+            statsToggleLabel="Show more game stats"
+            onStatsToggle={() =>
+              navigate(
+                `/nested-games?page=${controls.page}&limit=${controls.limit}&platform=${controls.filter.platform}&genre=${controls.filter.genre}&developer=${controls.filter.developer}&publisher=${controls.filter.publisher}`,
+              )
+            }
+          />
 
-        <GameFiltersComponent
-          filter={controls.filter}
-          platforms={platforms}
-          onApplyFilters={controls.applyFilters}
-        />
-
-        {games && games.items.length > 0 ? (
-          <>
+          {games && games.items.length > 0 && (
             <PaginationComponent
               page={controls.page}
               totalPages={games.totalPages}
@@ -47,26 +53,22 @@ export default function GamesComponent(): JSX.Element {
               onNextPage={() => controls.handleNextPage(games.totalPages)}
               onLimitChange={controls.handleLimitChange}
             />
+          )}
+        </aside>
 
-            <button
-              onClick={() =>
-                navigate(
-                  `/nested-games?page=${controls.page}&limit=${controls.limit}&platform=${controls.filter.platform}&genre=${controls.filter.genre}&developer=${controls.filter.developer}&publisher=${controls.filter.publisher}`,
-                )
-              }
-            >
-              Show more stats
-            </button>
-
-            <ul>
+        <main className="gamesContent">
+          {games && games.items.length > 0 ? (
+            <>
+            <ul className="gamesGrid">
               {games.items.map((game) => (
                 <GameList key={game.id} game={game} />
               ))}
             </ul>
-          </>
-        ) : (
-          <p>No games found</p>
-        )}
+            </>
+          ) : (
+            <p>No games found</p>
+          )}
+        </main>
       </div>
     </LoadingOrErrorComponent>
   );

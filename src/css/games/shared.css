@@ -1,0 +1,101 @@
+.scoreBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  min-width: 2.75rem;
+  height: 2.55rem;
+  padding: 0 0.45rem;
+  border-radius: 8px;
+  background: var(--score-color);
+  color: #15221b;
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.scoreRows {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 0.9rem 0;
+}
+
+.scoreRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.7rem;
+  min-height: 3.35rem;
+  padding: 0.55rem 0.65rem 0.55rem 0.8rem;
+  border: 1px solid color-mix(in srgb, var(--score-color) 26%, #d7d2ca);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--score-soft) 52%, #efeeeb);
+}
+
+.scoreLabel {
+  color: #26313a;
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.gameReadMore {
+  min-height: 2.1rem;
+  padding: 0.45rem 0.85rem;
+  border: 0;
+  border-radius: 6px;
+  background: #26313a;
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.gameReadMore:hover {
+  background: #3a4853;
+  transform: translateY(-1px);
+}
+
+.gameLink {
+  color: #26313a;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration-color: var(--score-color);
+  text-underline-offset: 0.25rem;
+}
+
+.gameMeta {
+  display: block;
+  font-size: 0.9rem;
+  color: #4d5962;
+  line-height: 1.4;
+  margin: 0 0 0.55rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid #d9d4cd;
+  border-radius: 8px;
+  background: #f7f5f1;
+}
+
+.gameDescription {
+  display: -webkit-box;
+  overflow: hidden;
+  margin: 0.7rem 0 0.55rem;
+  padding: 0.75rem;
+  border: 1px solid #d9d4cd;
+  border-radius: 8px;
+  background: #f7f5f1;
+  color: #34414a;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+@media (max-width: 640px) {
+  .scoreRows {
+    grid-template-columns: 1fr;
+  }
+}

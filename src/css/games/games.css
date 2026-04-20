@@ -1,0 +1,29 @@
+@import './shared.css';
+@import './controls.css';
+@import './cards.css';
+@import './details.css';
+
+.scoreExcellent {
+  --score-color: #00a76f;
+  --score-soft: #dff7ec;
+}
+
+.scoreGood {
+  --score-color: #42a85f;
+  --score-soft: #e4f4e7;
+}
+
+.scoreMixed {
+  --score-color: #d7a536;
+  --score-soft: #f7efd8;
+}
+
+.scoreLow {
+  --score-color: #cf5b53;
+  --score-soft: #f8e2df;
+}
+
+.scoreUnknown {
+  --score-color: #8b8f96;
+  --score-soft: #eef0f2;
+}

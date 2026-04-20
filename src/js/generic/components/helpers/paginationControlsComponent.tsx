@@ -33,22 +33,37 @@ export default function PaginationComponent({
   onLimitChange,
 }: Props): JSX.Element {
   return (
-    <div>
-      <p>
+    <section className="gamePaginationPanel">
+      <p className="pageStatus">
         Page {page} of {totalPages}
       </p>
 
-      <button onClick={onPreviousPage} disabled={page === 1}>
-        Previous
-      </button>
+      <div className="pageActions">
+        <button
+          className="pageButton"
+          onClick={onPreviousPage}
+          disabled={page === 1}
+        >
+          Previous
+        </button>
 
-      <button onClick={onNextPage} disabled={page === totalPages}>
-        Next
-      </button>
+        <button
+          className="pageButton"
+          onClick={onNextPage}
+          disabled={page === totalPages}
+        >
+          Next
+        </button>
+      </div>
 
-      <div>
+      <div className="pageLimit">
         <label htmlFor="limit">Games per page: </label>
-        <select id="limit" value={limit} onChange={onLimitChange}>
+        <select
+          className="pageSelect"
+          id="limit"
+          value={limit}
+          onChange={onLimitChange}
+        >
           {limitOptions.map((option) => (
             <option key={option} value={option}>
               {option}
@@ -56,6 +71,6 @@ export default function PaginationComponent({
           ))}
         </select>
       </div>
-    </div>
+    </section>
   );
 }
