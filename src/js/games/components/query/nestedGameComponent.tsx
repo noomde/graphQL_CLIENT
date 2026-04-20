@@ -114,14 +114,14 @@ export default function NestedGameComponent({
         <div className="gameDetailActions">
           <button
             className="gameReadMore"
-            onClick={() => navigate(`/games/update/:${game.id}`)}
+            onClick={() => navigate(`/games/update/${game.id}`)}
           >
             Update game
           </button>
 
           <button
             className="gameDangerButton"
-            onClick={() => navigate(`/games/delete/:${game.id}`)}
+            onClick={() => navigate(`/games/delete/${game.id}`)}
           >
             Delete game
           </button>

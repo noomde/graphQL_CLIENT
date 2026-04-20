@@ -2,6 +2,8 @@ import { useState, type JSX } from 'react';
 import { useDeleteGame } from '../../hooks/useMutationGame.ts';
 import { useNavigate } from 'react-router-dom';
 
+import '../../../../css/games/games.css';
+
 /**
  * A component for deleting a game.
  *
@@ -27,7 +29,7 @@ export default function DeleteGameComponent({
 
     try {
       await deleteGame(id);
-      navigate('/home');
+      navigate('/games');
     } catch (error) {
       setError('Failed to delete game, please try again.');
       console.error('Delete game error:', error);
@@ -37,19 +39,33 @@ export default function DeleteGameComponent({
   }
 
   return (
-    <div>
-      <h2>Delete game</h2>
-      <p>Are you sure you want to delete this game?</p>
+    <section className="gameMutationCard gameDeleteCard">
+      <div className="gameMutationHeader">
+        <p className="gameDetailEyebrow">Delete</p>
+        <h1 className="gameDetailTitle">Delete game #{id}</h1>
+      </div>
 
-      <button onClick={handleDeleteGame} disabled={loading}>
-        {loading ? 'Deleting...' : 'Delete game'}
-      </button>
+      <p className="gameDeleteText">Are you sure you want to delete this game?</p>
 
-      <button onClick={() => navigate('home')} disabled={loading}>
-        Cancel
-      </button>
+      {error && <p className="gameFormError">{error}</p>}
 
-      {error && <p>{error}</p>}
-    </div>
+      <div className="gameDetailActions">
+        <button
+          className="gameDangerButton"
+          onClick={handleDeleteGame}
+          disabled={loading}
+        >
+          {loading ? 'Deleting...' : 'Delete game'}
+        </button>
+
+        <button
+          className="gameReadMore"
+          onClick={() => navigate('/games')}
+          disabled={loading}
+        >
+          Cancel
+        </button>
+      </div>
+    </section>
   );
 }

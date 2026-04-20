@@ -1,0 +1,139 @@
+.gameMutationCard {
+  --brand-orange: #ea7a2f;
+
+  width: min(920px, calc(100% - 2rem));
+  margin: 2rem auto;
+  padding: 1.6rem;
+  border: 1px solid #ddd8d1;
+  border-top: 6px solid var(--brand-orange);
+  border-radius: 8px;
+  background: #efeeeb;
+  color: #26313a;
+  box-shadow: 0 16px 40px rgba(30, 34, 38, 0.1);
+}
+
+.gameMutationHeader {
+  margin-bottom: 1.25rem;
+}
+
+.gameMutationGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.gameFormField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  color: #26313a;
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.gameFormInput {
+  width: 100%;
+  min-height: 2.55rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid #d9d4cd;
+  border-radius: 8px;
+  background: #f7f5f1;
+  color: #26313a;
+  font: inherit;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.gameFormInput:focus {
+  border-color: #ea7a2f;
+  background: #fffaf5;
+  box-shadow: 0 0 0 3px rgba(234, 122, 47, 0.16);
+}
+
+.gameFormTextarea {
+  min-height: 9rem;
+  margin-top: 1rem;
+  resize: vertical;
+}
+
+.genreFieldset {
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 1px solid #d9d4cd;
+  border-radius: 8px;
+  background: #f7f5f1;
+}
+
+.genreFieldset legend {
+  padding: 0 0.35rem;
+  color: #26313a;
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.genreGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 0.6rem;
+}
+
+.genreOption {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 2.15rem;
+  padding: 0.45rem 0.55rem;
+  border: 1px solid #ded8d0;
+  border-radius: 8px;
+  background: #efeeeb;
+  color: #34414a;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.genreOption input {
+  accent-color: #ea7a2f;
+}
+
+.gameFormError {
+  margin: 1rem 0 0;
+  padding: 0.75rem;
+  border: 1px solid #e4aaa4;
+  border-radius: 8px;
+  background: #f8e2df;
+  color: #8e342f;
+  font-weight: 800;
+}
+
+.gameDeleteCard {
+  max-width: 680px;
+}
+
+.gameDeleteText {
+  margin: 0;
+  padding: 0.85rem;
+  border: 1px solid #d9d4cd;
+  border-radius: 8px;
+  background: #f7f5f1;
+  color: #34414a;
+  line-height: 1.5;
+}
+
+@media (max-width: 640px) {
+  .gameMutationCard {
+    width: calc(100% - 1rem);
+    margin: 1rem auto;
+    padding: 1rem;
+  }
+
+  .gameMutationGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .genreGrid {
+    grid-template-columns: 1fr;
+  }
+}
