@@ -19,7 +19,7 @@ export type Game = {
 /**
  * Defines the nested game response data.
  */
-type NestedGame = Game & {
+export type NestedGame = Game & {
   scores: Score | null;
   platforms: Platform[];
 };
