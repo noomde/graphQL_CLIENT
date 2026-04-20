@@ -27,7 +27,7 @@ export default function GamesComponent(): JSX.Element {
   return (
     <LoadingOrErrorComponent loading={loading} error={error} data={games}>
       <div>
-        <h2>Games</h2>
+        <h1>Games</h1>
 
         <GameFiltersComponent
           filter={controls.filter}
@@ -46,6 +46,16 @@ export default function GamesComponent(): JSX.Element {
               onNextPage={() => controls.handleNextPage(games.totalPages)}
               onLimitChange={controls.handleLimitChange}
             />
+
+            <button
+              onClick={() =>
+                navigate(
+                  `/nested-games?page=${controls.page}&limit=${controls.limit}&platform=${controls.filter.platform}&genre=${controls.filter.genre}&developer=${controls.filter.developer}&publisher=${controls.filter.publisher}`,
+                )
+              }
+            >
+              Show more stats
+            </button>
 
             <ul>
               {games.items.map((game) => (
