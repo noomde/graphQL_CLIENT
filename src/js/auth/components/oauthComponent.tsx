@@ -26,7 +26,7 @@ export default function OauthCallbackComponent(): JSX.Element {
         }
 
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/auth/github/callback?code=${code}`,
+          `https://graphqlclient-production.up.railway.app/api/auth/github/callback?code=${code}`,
         );
         const user = await response.json();
 
