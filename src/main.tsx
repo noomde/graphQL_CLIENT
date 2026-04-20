@@ -1,10 +1,30 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.tsx'
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import { ApolloProvider } from '@apollo/client/react';
+import { client } from './js/generic/apollo/apolloClient.ts';
+import { Toaster } from 'react-hot-toast';
+
+import App from './App.tsx';
+import './css/generic/index.css';
+
+import { AuthProvider } from './js/auth/context/authContext.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+    <ApolloProvider client={client}>
+      <BrowserRouter>
+        <AuthProvider>
+          <Toaster
+            position="top-right"
+            toastOptions={{
+              success: { duration: 4000 },
+              error: { duration: 6000 },
+            }}
+          />
+          <App />
+        </AuthProvider>
+      </BrowserRouter>
+    </ApolloProvider>
   </StrictMode>,
-)
+);

@@ -1,0 +1,57 @@
+import { Link, NavLink } from 'react-router-dom';
+import { isAuthenticated } from '../../auth/utils/isAuthenticated.ts';
+import '../../../css/generic/header.css'
+
+export default function Header() {
+  const loggedIn = isAuthenticated();
+
+  return (
+    <header className="header">
+      <nav className="navbar">
+        <Link to="/" className="logo">
+          <span className="logoText">MetaStat</span>
+        </Link>
+
+        <div className="navLinks">
+          <NavLink to="/games" className="navLink">
+            Games
+          </NavLink>
+
+          <NavLink to="/platforms" className="navLink">
+            Platforms
+          </NavLink>
+
+          {loggedIn && (
+            <>
+              <NavLink to="/dashboard" className="navLink">
+                Dashboard
+              </NavLink>
+
+              <NavLink to="/games/create" className="navLink">
+                Create
+              </NavLink>
+            </>
+          )}
+        </div>
+
+        <div className="authLinks">
+          {!loggedIn ? (
+            <>
+              <NavLink to="/login" className="authLink">
+                Login
+              </NavLink>
+
+              <NavLink to="/register" className="authButton">
+                Register
+              </NavLink>
+            </>
+          ) : (
+            <NavLink to="/logout" className="authButton">
+              Logout
+            </NavLink>
+          )}
+        </div>
+      </nav>
+    </header>
+  );
+}

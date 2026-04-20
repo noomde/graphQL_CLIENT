@@ -1,0 +1,175 @@
+.gamesPageShell {
+  display: grid;
+  grid-template-columns: minmax(230px, 300px) minmax(0, 1fr);
+  align-items: start;
+  gap: 1.5rem;
+  width: min(1500px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 1.25rem 0 2rem;
+}
+
+.gamesSidebar {
+  position: sticky;
+  top: 1rem;
+  z-index: 5;
+}
+
+.gamesContent {
+  min-width: 0;
+}
+
+.gamesPageTitle {
+  margin: 0 0 1rem;
+  color: #26313a;
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  line-height: 1.1;
+}
+
+.gameControlsPanel,
+.gamePaginationPanel {
+  --brand-orange: #ea7a2f;
+
+  border: 1px solid #ddd8d1;
+  border-top: 5px solid var(--brand-orange);
+  border-radius: 8px;
+  background: #efeeeb;
+  color: #26313a;
+  box-shadow: 0 10px 24px rgba(30, 34, 38, 0.08);
+}
+
+.gameControlsPanel {
+  padding: 1.1rem;
+}
+
+.gameControlsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.85rem;
+}
+
+.gameControlsHeader h3 {
+  margin: 0;
+  color: #26313a;
+  font-size: 1rem;
+}
+
+.filterGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: stretch;
+  gap: 0.75rem;
+}
+
+.filterInput,
+.pageSelect {
+  width: 100%;
+  min-height: 2.35rem;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid #d9d4cd;
+  border-radius: 8px;
+  background: #f7f5f1;
+  color: #26313a;
+  font: inherit;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.filterInput::placeholder {
+  color: #9b928a;
+}
+
+.filterInput:focus,
+.pageSelect:focus {
+  border-color: #ea7a2f;
+  background: #fffaf5;
+  box-shadow: 0 0 0 3px rgba(234, 122, 47, 0.16);
+}
+
+.filterButton {
+  width: 100%;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.gamePaginationPanel {
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-top: 1rem;
+  padding: 1rem;
+}
+
+.pageStatus {
+  margin: 0;
+  color: #26313a;
+  font-weight: 800;
+}
+
+.pageActions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.pageButton {
+  min-height: 2.1rem;
+  padding: 0.45rem 0.85rem;
+  border: 1px solid #d9d4cd;
+  border-radius: 6px;
+  background: #f7f5f1;
+  color: #26313a;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.pageButton:hover:not(:disabled) {
+  border-color: #ea7a2f;
+  background: #fffaf5;
+  transform: translateY(-1px);
+}
+
+.pageButton:disabled {
+  color: #a8a19a;
+  cursor: not-allowed;
+  opacity: 0.75;
+}
+
+.pageLimit {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 0.55rem;
+  color: #4d5962;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.pageSelect {
+  min-width: 5rem;
+  padding-right: 0.55rem;
+}
+
+.statsToggleButton {
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .gamesPageShell {
+    grid-template-columns: 1fr;
+    width: calc(100% - 1rem);
+  }
+
+  .gamesSidebar {
+    position: static;
+  }
+}
