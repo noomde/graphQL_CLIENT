@@ -1,6 +1,7 @@
 import { useState, type JSX } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUpdateGame } from '../../hooks/useMutationGame.ts';
+import toast from 'react-hot-toast';
 
 import { type Genre, GENRES } from '../../types/genresType.ts';
 import { type Rating, RATINGS } from '../../types/ratingType.ts';
@@ -51,6 +52,7 @@ export default function UpdateGameComponent({
         developer,
         publisher,
       });
+      toast.success('Game updated successfully');
       navigate(`/games/${game?.id}`);
     } catch (error) {
       setError('Failed to update game, please try again.');
@@ -59,8 +61,6 @@ export default function UpdateGameComponent({
       setLoading(false);
     }
   }
-
-  console.log('UpdateGameComponent id:', id);
 
   return (
     <form className="gameMutationCard" onSubmit={handleUpdateGame}>

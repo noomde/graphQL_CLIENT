@@ -1,6 +1,9 @@
 import { useState, type JSX } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth.ts';
+import toast from 'react-hot-toast';
+
+import '../../../css/auth/auth.css';
 
 /**
  * Register component allows users to register using their credentials.
@@ -26,6 +29,8 @@ export default function RegisterComponent(): JSX.Element {
 
     try {
       await register({ username, password });
+
+      toast.success('Registered successfully');
       navigate('/login');
     } catch (error) {
       setError('Registration failed. Please check your credentials.');
@@ -36,31 +41,44 @@ export default function RegisterComponent(): JSX.Element {
   }
 
   return (
-    <form className="register-form fade-in" onSubmit={handleRegister}>
-      <h1 className="register-title">Register</h1>
-      {error && <p className="register-error">{error}</p>}
+    <main className="authShell">
+      <form className="authCard" onSubmit={handleRegister}>
+        <p className="authEyebrow">Create account</p>
+        <h1 className="authTitle">Register</h1>
+        {error && <p className="authError">{error}</p>}
 
-      <input
-        className="register-input"
-        type="text"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        placeholder="Username"
-      />
-      <input
-        className="register-input"
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
-      />
-      <button
-        className="register-button"
-        type="submit"
-        disabled={!username || !password || loading}
-      >
-        {loading ? 'Registering...' : 'Register'}
-      </button>
-    </form>
+        <label className="authField">
+          Username
+          <input
+            className="authInput"
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Username"
+          />
+        </label>
+
+        <label className="authField">
+          Password
+          <input
+            className="authInput"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+          />
+        </label>
+
+        <div className="authActions">
+          <button
+            className="authPrimaryButton"
+            type="submit"
+            disabled={!username || !password || loading}
+          >
+            {loading ? 'Registering...' : 'Register'}
+          </button>
+        </div>
+      </form>
+    </main>
   );
 }

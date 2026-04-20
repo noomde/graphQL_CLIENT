@@ -1,6 +1,7 @@
 import { useState, type JSX } from 'react';
 import { useDeleteGame } from '../../hooks/useMutationGame.ts';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 import '../../../../css/games/games.css';
 
@@ -29,6 +30,7 @@ export default function DeleteGameComponent({
 
     try {
       await deleteGame(id);
+      toast.success('Game deleted successfully');
       navigate('/games');
     } catch (error) {
       setError('Failed to delete game, please try again.');
@@ -45,7 +47,9 @@ export default function DeleteGameComponent({
         <h1 className="gameDetailTitle">Delete game #{id}</h1>
       </div>
 
-      <p className="gameDeleteText">Are you sure you want to delete this game?</p>
+      <p className="gameDeleteText">
+        Are you sure you want to delete this game?
+      </p>
 
       {error && <p className="gameFormError">{error}</p>}
 

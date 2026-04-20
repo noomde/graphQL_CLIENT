@@ -1,0 +1,176 @@
+.authShell {
+  display: grid;
+  place-items: start center;
+  min-height: calc(100vh - 7rem);
+  padding: 2rem 1rem;
+  background: #e7e4df;
+}
+
+.authCard {
+  --brand-orange: #ea7a2f;
+
+  width: min(480px, 100%);
+  padding: 1.6rem;
+  border: 1px solid #ddd8d1;
+  border-top: 6px solid var(--brand-orange);
+  border-radius: 8px;
+  background: #efeeeb;
+  color: #26313a;
+  box-shadow: 0 16px 40px rgba(30, 34, 38, 0.1);
+}
+
+.authLogoutCard {
+  width: min(620px, 100%);
+}
+
+.authEyebrow {
+  margin: 0 0 0.35rem;
+  color: #8a8178;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.06rem;
+  text-transform: uppercase;
+}
+
+.authTitle {
+  margin: 0 0 1.25rem;
+  color: #26313a;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  line-height: 1.1;
+}
+
+.authField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin-bottom: 0.9rem;
+  color: #26313a;
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.authInput {
+  width: 100%;
+  min-height: 2.55rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid #d9d4cd;
+  border-radius: 8px;
+  background: #f7f5f1;
+  color: #26313a;
+  font: inherit;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.authInput::placeholder {
+  color: #9b928a;
+}
+
+.authInput:focus {
+  border-color: #ea7a2f;
+  background: #fffaf5;
+  box-shadow: 0 0 0 3px rgba(234, 122, 47, 0.16);
+}
+
+.authActions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid #d9d4cd;
+}
+
+.authPrimaryButton,
+.authSecondaryButton,
+.authDangerButton {
+  min-height: 2.25rem;
+  padding: 0.5rem 0.9rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.authPrimaryButton {
+  border: 0;
+  background: #26313a;
+  color: #fff;
+}
+
+.authPrimaryButton:hover:not(:disabled),
+.authSecondaryButton:hover:not(:disabled),
+.authDangerButton:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.authPrimaryButton:hover:not(:disabled) {
+  background: #3a4853;
+}
+
+.authSecondaryButton {
+  border: 1px solid #d9d4cd;
+  background: #f7f5f1;
+  color: #26313a;
+}
+
+.authSecondaryButton:hover:not(:disabled) {
+  border-color: #ea7a2f;
+  background: #fffaf5;
+}
+
+.authDangerButton {
+  border: 0;
+  background: #b94a43;
+  color: #fff;
+}
+
+.authDangerButton:hover:not(:disabled) {
+  background: #9e3c36;
+}
+
+.authPrimaryButton:disabled,
+.authSecondaryButton:disabled,
+.authDangerButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.authError {
+  margin: 0 0 1rem;
+  padding: 0.75rem;
+  border: 1px solid #e4aaa4;
+  border-radius: 8px;
+  background: #f8e2df;
+  color: #8e342f;
+  font-weight: 800;
+}
+
+@media (max-width: 640px) {
+  .authShell {
+    padding: 1rem 0.5rem;
+  }
+
+  .authCard {
+    padding: 1rem;
+  }
+
+  .authActions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .authPrimaryButton,
+  .authSecondaryButton,
+  .authDangerButton {
+    width: 100%;
+  }
+}

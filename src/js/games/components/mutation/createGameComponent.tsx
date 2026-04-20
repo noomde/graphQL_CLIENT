@@ -1,6 +1,7 @@
 import { useState, type JSX } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCreateGame } from '../../hooks/useMutationGame.ts';
+import toast from 'react-hot-toast';
 
 import { type Genre, GENRES } from '../../types/genresType.ts';
 import { type Rating, RATINGS } from '../../types/ratingType.ts';
@@ -46,6 +47,7 @@ export default function CreateGameComponent(): JSX.Element {
         developer,
         publisher,
       });
+      toast.success('Game added successfully');
       navigate(`/games/${game?.id}`);
     } catch (error) {
       setError('Failed to create game, please try again.');

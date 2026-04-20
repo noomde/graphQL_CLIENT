@@ -1,0 +1,128 @@
+.platformsShell {
+  width: min(1300px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 1.25rem 0 2rem;
+}
+
+.platformsHero,
+.platformCard,
+.platformStatus,
+.platformError {
+  --brand-orange: #ea7a2f;
+
+  border: 1px solid #ddd8d1;
+  border-top: 5px solid var(--brand-orange);
+  border-radius: 8px;
+  background: #efeeeb;
+  color: #26313a;
+  box-shadow: 0 10px 24px rgba(30, 34, 38, 0.08);
+}
+
+.platformsHero {
+  margin-bottom: 1.25rem;
+  padding: 1.35rem;
+}
+
+.platformsEyebrow {
+  margin: 0 0 0.35rem;
+  color: #8a8178;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.06rem;
+  text-transform: uppercase;
+}
+
+.platformsTitle {
+  margin: 0;
+  color: #26313a;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  line-height: 1.1;
+}
+
+.platformsSummary {
+  display: inline-block;
+  margin: 1rem 0 0;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid #d9d4cd;
+  border-radius: 8px;
+  background: #f7f5f1;
+  color: #4d5962;
+  font-weight: 800;
+}
+
+.platformsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.platformCard {
+  position: relative;
+  min-height: 145px;
+  padding: 1.15rem;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.platformCard:hover {
+  border-color: color-mix(in srgb, var(--brand-orange) 42%, #ddd8d1);
+  box-shadow: 0 16px 34px rgba(30, 34, 38, 0.14);
+  transform: translateY(-4px);
+}
+
+.platformName {
+  margin: 0;
+  padding: 0.75rem;
+  border: 1px solid #d9d4cd;
+  border-radius: 8px;
+  background: #f7f5f1;
+  color: #26313a;
+  font-size: 1.2rem;
+  line-height: 1.25;
+}
+
+.platformNumber {
+  position: absolute;
+  right: 1rem;
+  bottom: 0.8rem;
+  margin: 0;
+  color: #8a8178;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.02rem;
+}
+
+.platformStatus,
+.platformError {
+  width: min(680px, 100%);
+  margin: 1.5rem auto;
+  padding: 1rem;
+  font-weight: 800;
+}
+
+.platformError {
+  border-color: #e4aaa4;
+  border-top-color: #b94a43;
+  background: #f8e2df;
+  color: #8e342f;
+}
+
+@media (max-width: 640px) {
+  .platformsShell {
+    width: calc(100% - 1rem);
+  }
+
+  .platformsHero,
+  .platformCard {
+    padding: 1rem;
+  }
+
+  .platformsGrid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -30,8 +30,6 @@ export default function OauthCallbackComponent(): JSX.Element {
         );
         const user = await response.json();
 
-        console.log('github user from server:', user);
-
         const payload = await oauthLogin({
           provider: 'github',
           providerId: String(user.id),

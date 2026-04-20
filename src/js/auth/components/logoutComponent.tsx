@@ -1,6 +1,9 @@
 import { type JSX } from 'react';
 import { useAuth } from '../hooks/useAuth.ts';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+
+import '../../../css/auth/auth.css';
 
 /**
  * Logout component, allows users to logout from their account.
@@ -16,19 +19,25 @@ export default function LogoutComponent(): JSX.Element {
    */
   function handleLogout() {
     logout();
-    navigate('/home');
+    toast.success('Logged out successfully');
+    navigate('/');
   }
 
   return (
-    <div className="logout-container">
-      <h1 className="logout-title">Are you sure you want to logout?</h1>
-      <div className="logout-buttons"></div>
-      <button className="logout-button" onClick={handleLogout}>
-        Logout
-      </button>
-      <button className="cancel-button" onClick={() => navigate('home')}>
-        Cancel
-      </button>
-    </div>
+    <main className="authShell">
+      <section className="authCard authLogoutCard">
+        <p className="authEyebrow">Logout</p>
+        <h1 className="authTitle">Are you sure you want to logout?</h1>
+
+        <div className="authActions">
+          <button className="authDangerButton" onClick={handleLogout}>
+            Logout
+          </button>
+          <button className="authSecondaryButton" onClick={() => navigate('/')}>
+            Cancel
+          </button>
+        </div>
+      </section>
+    </main>
   );
 }

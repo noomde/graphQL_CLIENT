@@ -1,5 +1,8 @@
 import { type JSX } from 'react';
 import { usePlatforms } from '../hooks/usePlatforms.ts';
+import LoadingOrErrorComponent from '../../generic/components/helpers/loadingOrErrorComponent.tsx';
+
+import '../../../css/platforms/platforms.css';
 
 /**
  * A component for rendering platforms.
@@ -9,24 +12,26 @@ import { usePlatforms } from '../hooks/usePlatforms.ts';
 export default function PlatformsComponent(): JSX.Element {
   const { platforms, loading, error } = usePlatforms();
 
-  // TODO update to make more less repetetive
-  if (loading) {
-    return <p>Loading platforms...</p>;
-  }
-
-  if (error) {
-    return <p>Failed to load platforms, please try again</p>;
-  }
-
-  // TODO add the real rendering of data
   return (
-    <div>
-      <h1>Platforms</h1>
-      <ul>
-        {platforms.map((platform) => (
-          <li key={platform.id}>{platform.name}</li>
-        ))}
-      </ul>
-    </div>
+    <LoadingOrErrorComponent loading={loading} error={error} data={platforms}>
+      <main className="platformsShell">
+        <section className="platformsHero">
+          <p className="platformsEyebrow">Game systems</p>
+          <h1 className="platformsTitle">Platforms</h1>
+          <p className="platformsSummary">
+            {platforms.length} platforms available
+          </p>
+        </section>
+
+        <ul className="platformsGrid">
+          {platforms.map((platform) => (
+            <li className="platformCard" key={platform.id}>
+              <p className="platformNumber">#{platform.id}</p>
+              <h2 className="platformName">{platform.name}</h2>
+            </li>
+          ))}
+        </ul>
+      </main>
+    </LoadingOrErrorComponent>
   );
 }

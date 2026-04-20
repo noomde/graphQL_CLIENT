@@ -2,6 +2,9 @@ import { useState, type JSX } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth.ts';
 import { handleGithubLogin } from '../utils/handleGithubLogin.ts';
+import toast from 'react-hot-toast';
+
+import '../../../css/auth/auth.css';
 
 /**
  * Login component allows users to login using their credentials.
@@ -30,6 +33,7 @@ export default function LoginComponent(): JSX.Element {
 
     try {
       await login({ username, password });
+      toast.success('Logged in successfully');
       navigate('/dashboard');
     } catch (error) {
       setError('Login failed. Please check your credentials.');
@@ -40,39 +44,54 @@ export default function LoginComponent(): JSX.Element {
   }
 
   return (
-    <form className="login-form" onSubmit={handleLogin}>
-      <h1 className="login-title">Login</h1>
-      {error && <p className="login-error">{error}</p>}
+    <main className="authShell">
+      <form className="authCard" onSubmit={handleLogin}>
+        <p className="authEyebrow">Welcome back</p>
+        <h1 className="authTitle">Login</h1>
+        {error && <p className="authError">{error}</p>}
 
-      <input
-        className="login-input"
-        type="text"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
+        <label className="authField">
+          Username
+          <input
+            className="authInput"
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </label>
 
-      <input
-        className="login-input"
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
+        <label className="authField">
+          Password
+          <input
+            className="authInput"
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </label>
 
-      <button className="login-button" type="submit" disabled={loading}>
-        {loading ? 'Logging in...' : 'Login'}
-      </button>
+        <div className="authActions">
+          <button className="authPrimaryButton" type="submit" disabled={loading}>
+            {loading ? 'Logging in...' : 'Login'}
+          </button>
 
-      <button type="button" onClick={handleGithubLogin}>
-        Login with GitHub
-      </button>
+          <button
+            className="authSecondaryButton"
+            type="button"
+            onClick={handleGithubLogin}
+          >
+            Login with GitHub
+          </button>
+        </div>
 
-      {sessionExpired && (
-        <p className="login-error">
-          Your session has expired. Please log in again.
-        </p>
-      )}
-    </form>
+        {sessionExpired && (
+          <p className="authError">
+            Your session has expired. Please log in again.
+          </p>
+        )}
+      </form>
+    </main>
   );
 }
