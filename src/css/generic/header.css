@@ -1,0 +1,83 @@
+.header {
+  width: 100%;
+  padding: 1rem 2rem;
+  background: #f5f1ec;
+}
+
+.navbar {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.logo {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.logoText {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #ea7a2f;
+  letter-spacing: 0.5px;
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.navLink {
+  text-decoration: none;
+  color: #333333;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.navLink:hover {
+  color: #ea7a2f;
+}
+
+.navLink.active {
+  color: #ea7a2f;
+}
+
+.authLinks {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.authLink {
+  text-decoration: none;
+  color: #ea7a2f;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.authButton {
+  text-decoration: none;
+  background: #ea7a2f;
+  color: #ffffff;
+  padding: 0.65rem 1.1rem;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.authButton:hover {
+  background: #d8661b;
+  transform: translateY(-1px);
+}

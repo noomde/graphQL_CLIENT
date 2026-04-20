@@ -3,7 +3,9 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { ApolloProvider } from '@apollo/client/react';
 import { client } from './js/generic/apollo/apolloClient.ts';
+
 import App from './App.tsx';
+import './css/generic/index.css'
 
 import { AuthProvider } from './js/auth/context/authContext.tsx';
 
