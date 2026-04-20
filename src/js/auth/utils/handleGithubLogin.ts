@@ -5,9 +5,6 @@ export function handleGithubLogin() {
   const state = crypto.randomUUID();
   sessionStorage.setItem('github_oauth_state', state)
 
-  console.log('clientId:', clientId);
-  console.log('redirectUri:', redirectUri);
-
   const url =
     `https://github.com/login/oauth/authorize` +
     `?client_id=${clientId}` +

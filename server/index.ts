@@ -16,7 +16,7 @@ const distPath = path.join(__dirname, '../dist');
 
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:3000',
+    origin: process.env.CLIENT_URL || 'https://graphqlclient-production.up.railway.app/',
     credentials: true,
   }),
 );
