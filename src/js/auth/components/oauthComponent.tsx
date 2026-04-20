@@ -26,7 +26,7 @@ export default function OauthCallbackComponent(): JSX.Element {
         }
 
         const response = await fetch(
-          `http://localhost:3000/api/auth/github/callback?code=${code}`,
+          `https://graphqlclient-production.up.railway.app/api/auth/github/callback?code=${code}`,
         );
         const user = await response.json();
 
