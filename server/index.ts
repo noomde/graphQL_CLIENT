@@ -13,10 +13,11 @@ const __dirname = path.dirname(__filename);
 
 const PORT = process.env.PORT || 3000;
 const distPath = path.join(__dirname, '../dist');
+const clientOrigin = (process.env.CLIENT_URL || 'https://graphqlclient-production.up.railway.app').replace(/\/$/, '');
 
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || 'https://graphqlclient-production.up.railway.app/',
+    origin: clientOrigin,
     credentials: true,
   }),
 );
