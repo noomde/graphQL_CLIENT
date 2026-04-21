@@ -174,3 +174,54 @@ The GitHub OAuth app should also use this callback URL:
 ```text
 https://graphqlclient-production.up.railway.app/oauth/callback
 ```
+# README
+
+## Possible structure
+public
+└── favicon
+src
+├── css
+
+├── js
+
+│   ├── games
+
+│   │   ├── components
+
+│   │   ├── graphql
+
+│   │   └── pages
+
+│   ├── auth
+
+│   │   ├── components
+
+│   │   ├── graphql
+
+│   │   ├── pages
+
+│   │   └── context
+
+│   ├── platforms
+
+│   │   ├── components
+
+│   │   ├── graphql
+
+│   │   └── pages
+
+│   ├── scores
+
+│   │   ├── components
+
+│   │   ├── graphql
+
+│   │   └── pages
+
+│   └── generic
+
+│   │   ├── components
+
+│   │   └── pages
+
+└── index.js
