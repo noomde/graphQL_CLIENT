@@ -1,4 +1,6 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
+
+import HomePage from './js/generic/pages/homePage.tsx';
 
 import GamesPage from './js/games/pages/query/gamesPage.tsx';
 import GamePage from './js/games/pages/query/gamePage.tsx';
@@ -23,7 +25,7 @@ import ProtectedRoute from './js/auth/components/protectedRoute.tsx'
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/nested-games" replace />} />
+      <Route path="/" element={<HomePage />} />
 
       <Route path="/games" element={<GamesPage />} />
       <Route path="/games/:id" element={<GamePage />} />
