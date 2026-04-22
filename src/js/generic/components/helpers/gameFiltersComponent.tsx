@@ -20,7 +20,6 @@ type Props = {
 
 /**
  * Component for filtering games. 
- * Manages the local filter state and applies when clicked button or enter.
  *
  * @param filter - Initial filter values.
  * @param platforms - Available platform options for autocomplete.

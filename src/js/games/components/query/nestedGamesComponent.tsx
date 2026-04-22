@@ -1,5 +1,6 @@
-import { type JSX } from 'react';
+import { type JSX, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import type { GamesFilter } from '../../types/inputType.ts';
 
 import { useNestedGames } from '../../hooks/useGame.ts';
 import { useGameListControls } from '../../hooks/useGamesControls.ts';
@@ -9,7 +10,7 @@ import GameFiltersComponent from '../../../generic/components/helpers/gameFilter
 import PaginationComponent from '../../../generic/components/helpers/paginationControlsComponent.tsx';
 import NestedGameList from '../jsxElements/nestedGamesList.tsx';
 
-import '../../../../css/games/games.css'
+import '../../../../css/games/games.css';
 
 /**
  * A component for rendering all games with their scores and platforms.
@@ -21,20 +22,43 @@ export default function NestedGamesComponent(): JSX.Element {
   const controls = useGameListControls();
   const navigate = useNavigate();
 
+  const [filterDraft, setFilterDraft] = useState<GamesFilter>(controls.filter);
+
   const { games, loading, error } = useNestedGames({
     page: controls.page,
     limit: controls.limit,
     filter: controls.normalizedFilter,
   });
 
+  /**
+   * Sets the filter state locally
+   *
+   * @param name - Name of the filter.
+   * @param value - The filter value.
+   */
+  function handleFilterChange(name: keyof GamesFilter, value: string): void {
+    setFilterDraft((previous) => ({
+      ...previous,
+      [name]: value,
+    }));
+  }
+
+  /**
+   * Applies the filter globally.
+   */
+  function handleApplyFilters(): void {
+    controls.applyFilters(filterDraft);
+  }
+
   return (
     <LoadingOrErrorComponent loading={loading} error={error} data={games}>
       <div className="gamesPageShell">
         <aside className="gamesSidebar">
           <GameFiltersComponent
-            filter={controls.filter}
+            filter={filterDraft}
             platforms={platforms}
-            onApplyFilters={controls.applyFilters}
+            onFilterChange={handleFilterChange}
+            onApplyFilters={handleApplyFilters}
             statsToggleLabel="Show less game stats"
             onStatsToggle={() =>
               navigate(
@@ -59,11 +83,11 @@ export default function NestedGamesComponent(): JSX.Element {
         <main className="gamesContent">
           {games && games.items.length > 0 ? (
             <>
-            <ul className='gamesGrid'>
-              {games.items.map((game) => (
-                <NestedGameList key={game.id} game={game} />
-              ))}
-            </ul>
+              <ul className="gamesGrid">
+                {games.items.map((game) => (
+                  <NestedGameList key={game.id} game={game} />
+                ))}
+              </ul>
             </>
           ) : (
             <p>No games found</p>
