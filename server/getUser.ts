@@ -1,5 +1,11 @@
 import { type User } from './types.ts';
 
+/**
+ * Checks the user data to see if it is in the correct format.
+ *
+ * @param {object} data - The user data.
+ * @returns {boolean} - True if the user data is correct, false otherwise.
+ */
 function isUser(data: unknown): data is User {
   return (
     typeof data === 'object' &&
@@ -15,7 +21,7 @@ function isUser(data: unknown): data is User {
  * Exchanges github token for user.
  *
  * @param {string} accessToken - Github access token string.
- * @returns {Promise<User>}
+ * @returns {Promise<User>} - The user if the response was successfull.
  */
 export async function exchangeTokenForUser(accessToken: string): Promise<User> {
   const userResponse = await fetch('https://api.github.com/user', {

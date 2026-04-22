@@ -1,9 +1,9 @@
 import { Link, NavLink } from 'react-router-dom';
-import { isAuthenticated } from '../../auth/utils/isAuthenticated.ts';
+import { useAuth } from '../../auth/hooks/useAuth.ts';
 import '../../../css/generic/header.css'
 
 export default function Header() {
-  const loggedIn = isAuthenticated();
+  const { isAuthenticated } = useAuth();
 
   return (
     <header className="header">
@@ -21,7 +21,7 @@ export default function Header() {
             Platforms
           </NavLink>
 
-          {loggedIn && (
+          {isAuthenticated && (
             <>
               <NavLink to="/dashboard" className="navLink">
                 Dashboard
@@ -35,7 +35,7 @@ export default function Header() {
         </div>
 
         <div className="authLinks">
-          {!loggedIn ? (
+          {!isAuthenticated ? (
             <>
               <NavLink to="/login" className="authLink">
                 Login

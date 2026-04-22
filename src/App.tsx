@@ -22,6 +22,11 @@ import StatisticsDashboardPage from './js/statistics/pages/statsticsDashboardPag
 
 import ProtectedRoute from './js/auth/components/protectedRoute.tsx'
 
+/**
+ * The router for the service.
+ *
+ * @returns - All possible routes which makes them available over the whole app.
+ */
 function App() {
   return (
     <Routes>

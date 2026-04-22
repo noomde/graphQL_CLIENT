@@ -12,6 +12,12 @@ import {
 import { restoreUser } from '../utils/restoreUser.ts';
 import { AuthContext } from '../hooks/useAuth.ts';
 
+/**
+ * Handles the user context.
+ *
+ * @param children - all children components (The whole app).
+ * @returns - The authContext provider with data like user or login.
+ */
 export function AuthProvider({ children }: { children: ReactNode }) {
   const client = useApolloClient();
 
