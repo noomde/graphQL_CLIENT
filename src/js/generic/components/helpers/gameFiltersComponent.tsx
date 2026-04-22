@@ -1,6 +1,4 @@
 import {
-  useEffect,
-  useState,
   type ChangeEvent,
   type KeyboardEvent,
   type JSX,
@@ -14,36 +12,40 @@ type PlatformOption = {
 type Props = {
   filter: GamesFilter;
   platforms: PlatformOption[];
-  onApplyFilters: (filter: GamesFilter) => void;
+  onFilterChange: (name: keyof GamesFilter, value: string) => void;
+  onApplyFilters: () => void;
   statsToggleLabel?: string;
   onStatsToggle?: () => void;
 };
 
+/**
+ * Component for filtering games. 
+ * Manages the local filter state and applies when clicked button or enter.
+ *
+ * @param filter - Initial filter values.
+ * @param platforms - Available platform options for autocomplete.
+ * @param onApplyFilters - Callback triggered when filters are applied.
+ * @param statsToggleLabel - Optional label for toggling statistics view.
+ * @param onStatsToggle - Optional callback for toggling statistics.
+ * @returns - The filter UI component.
+ */
 export default function GameFiltersComponent({
   filter,
   platforms,
+  onFilterChange,
   onApplyFilters,
   statsToggleLabel,
   onStatsToggle,
 }: Props): JSX.Element {
-  const [localFilter, setLocalFilter] = useState(filter);
-
-  useEffect(() => {
-    setLocalFilter(filter);
-  }, [filter]);
-
   function handleChange(event: ChangeEvent<HTMLInputElement>): void {
     const { name, value } = event.target;
 
-    setLocalFilter((previous) => ({
-      ...previous,
-      [name]: value,
-    }));
+    onFilterChange(name as keyof GamesFilter, value);
   }
 
   function handleKeyDown(event: KeyboardEvent<HTMLInputElement>): void {
     if (event.key === 'Enter') {
-      onApplyFilters(localFilter);
+      onApplyFilters();
     }
   }
 
@@ -60,7 +62,7 @@ export default function GameFiltersComponent({
           name="platform"
           list="platform-options"
           placeholder="Filter by platform"
-          value={localFilter.platform ?? ''}
+          value={filter.platform ?? ''}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
         />
@@ -76,7 +78,7 @@ export default function GameFiltersComponent({
           type="text"
           name="genre"
           placeholder="Filter by genre"
-          value={localFilter.genre ?? ''}
+          value={filter.genre ?? ''}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
         />
@@ -86,7 +88,7 @@ export default function GameFiltersComponent({
           type="text"
           name="developer"
           placeholder="Filter by developer"
-          value={localFilter.developer ?? ''}
+          value={filter.developer ?? ''}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
         />
@@ -96,14 +98,14 @@ export default function GameFiltersComponent({
           type="text"
           name="publisher"
           placeholder="Filter by publisher"
-          value={localFilter.publisher ?? ''}
+          value={filter.publisher ?? ''}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
         />
 
         <button
           className="gameReadMore filterButton"
-          onClick={() => onApplyFilters(localFilter)}
+          onClick={onApplyFilters}
         >
           Apply filters
         </button>

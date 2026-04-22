@@ -1,8 +1,14 @@
+import { type JSX } from 'react'
 import { Link, NavLink } from 'react-router-dom';
 import { useAuth } from '../../auth/hooks/useAuth.ts';
 import '../../../css/generic/header.css'
 
-export default function Header() {
+/**
+ * The header component.
+ *
+ * @returns {JSX.Element}- The header as a component.
+ */
+export default function Header(): JSX.Element {
   const { isAuthenticated } = useAuth();
 
   return (

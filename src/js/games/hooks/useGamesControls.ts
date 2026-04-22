@@ -4,7 +4,6 @@ import type { GamesFilter } from '../types/inputType.ts';
 
 const LIMIT_OPTIONS = [25, 50, 100] as const;
 export type LimitOption = (typeof LIMIT_OPTIONS)[number];
-type FilterField = keyof GamesFilter;
 
 /**
  * Return type for the hook.
@@ -18,7 +17,6 @@ type UseGameListControlsReturn = {
   handleLimitChange: (event: ChangeEvent<HTMLSelectElement>) => void;
   handlePreviousPage: () => void;
   handleNextPage: (totalPages?: number) => void;
-  setFilterField: (name: FilterField, value: string) => void;
   applyFilters: (newFilter: GamesFilter) => void;
 };
 
@@ -34,9 +32,7 @@ export function useGameListControls(): UseGameListControlsReturn {
   const page = rawPage > 0 ? rawPage : 1;
 
   const rawLimit = Number(searchParams.get('limit') || '25') as LimitOption;
-  const limit = LIMIT_OPTIONS.includes(rawLimit as LimitOption)
-    ? (rawLimit as LimitOption)
-    : 25;
+  const limit = LIMIT_OPTIONS.includes(rawLimit) ? rawLimit : 25;
 
   const filter: GamesFilter = {
     platform: searchParams.get('platform') || '',
@@ -68,17 +64,7 @@ export function useGameListControls(): UseGameListControlsReturn {
   }
 
   /**
-   * Sets a single filter field (e.g. platform, genre).
-   */
-  function setFilterField(name: FilterField, value: string): void {
-    updateParams({
-      [name]: value,
-      page: 1,
-    });
-  }
-
-  /**
-   * Applies all filters at once.
+   * Applies all draft filters to the URL.
    */
   function applyFilters(newFilter: GamesFilter): void {
     updateParams({
@@ -138,7 +124,6 @@ export function useGameListControls(): UseGameListControlsReturn {
     handleLimitChange,
     handlePreviousPage,
     handleNextPage,
-    setFilterField,
     applyFilters,
   };
 }
