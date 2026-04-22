@@ -1,3 +1,6 @@
+/**
+ * Works as a start for the OAuth sequence. By sending the initial link to the oauth app.
+ */
 export function handleGithubLogin() {
   const clientId = import.meta.env.VITE_GITHUB_CLIENT_ID;
   const redirectUri = import.meta.env.VITE_REDIRECT_URI;

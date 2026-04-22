@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { type JSX } from 'react';
-import { isAuthenticated } from '../../auth/utils/isAuthenticated.ts';
+import { useAuth } from '../../auth/hooks/useAuth';
 import '../../../css/generic/home.css';
 
 const highlights = [
@@ -45,7 +45,7 @@ const sections = [
  * @returns {JSX.Element} The home component.
  */
 export default function Home(): JSX.Element {
-  const loggedIn = isAuthenticated();
+const { isAuthenticated } = useAuth();
 
   return (
     <main className='homeShell'>
@@ -62,8 +62,8 @@ export default function Home(): JSX.Element {
             <Link to='/nested-games' className='homePrimaryAction'>
               Browse games
             </Link>
-            <Link to={loggedIn ? '/dashboard' : '/login'} className='homeSecondaryAction'>
-              {loggedIn ? 'Open dashboard' : 'Login for dashboard'}
+            <Link to={isAuthenticated ? '/dashboard' : '/login'} className='homeSecondaryAction'>
+              {isAuthenticated ? 'Open dashboard' : 'Login for dashboard'}
             </Link>
             <Link to='https://www.metacritic.com/' className='homeSecondaryAction'>
               To metacritic
