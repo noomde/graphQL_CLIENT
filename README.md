@@ -122,11 +122,13 @@ Previews the Vite production build locally.
 
 ## Main Routes
 
-- `/` redirects to `/nested-games` should soon be a home page.
+- `/` shows normal functions in the webpage.
 - `/games` shows the basic games list
+- `/games/:id` shows a game with basic data.
 - `/nested-games` shows games with scores and platform data
+- `/nested-games/:id` shows a game with scores and platform data.
 - `/platforms` shows all platforms
-- `/login` lets users log in
+- `/login` lets users log in through oauth or normally
 - `/register` lets users create an account
 - `/dashboard` shows statistics for logged-in users
 - `/games/create` lets logged-in users create a game
