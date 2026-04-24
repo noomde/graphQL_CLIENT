@@ -18,8 +18,7 @@ createRoot(document.getElementById('root')!).render(
           <Toaster
             position="top-right"
             toastOptions={{
-              success: { duration: 4000 },
-              error: { duration: 6000 },
+              success: { duration: 4000 }
             }}
           />
           <App />
