@@ -18,7 +18,7 @@ Open the live application at:
 https://graphqlclient-production.up.railway.app/
 ```
 
-The start page redirects to the games list. From there you can:
+The start page just has info on how to use the app. For simplicities sake. We can start in Games:
 
 1. Go to **Games** to browse games.
 2. Use the filters to search by platform, genre, developer or publisher.
@@ -130,6 +130,7 @@ Previews the Vite production build locally.
 - `/platforms` shows all platforms
 - `/login` lets users log in through oauth or normally
 - `/register` lets users create an account
+- `/logout` lets the user logout
 - `/dashboard` shows statistics for logged-in users
 - `/games/create` lets logged-in users create a game
 - `/games/update/:id` lets logged-in users update a game
@@ -168,7 +169,6 @@ Make sure the production environment variables match the deployed URLs:
 ```env
 VITE_GRAPHQL_URL=https://reliable-hope-production-e0b4.up.railway.app/graphql
 VITE_REDIRECT_URI=https://graphqlclient-production.up.railway.app/oauth/callback
-CLIENT_URL=https://graphqlclient-production.up.railway.app
 ```
 
 The GitHub OAuth app should also use this callback URL:
